@@ -1,0 +1,39 @@
+main {
+    /* display: grid; */
+    /* place-items: center; */
+    text-align: center;
+    width: 400px;
+    min-height: 400px;
+    margin: 0 auto;
+    background-color: rgb(228, 228, 228);
+    padding: 6px;
+}
+
+.text {
+    font-size: large;
+}
+
+.text.success {
+    font-weight: bolder;
+    color: green;
+}
+
+.text.error {
+    font-weight: bolder;
+    color: red;
+}
+
+button {
+    margin-top: 17px;
+    padding: 6px 12px;
+    outline: unset;
+    border: 1px solid transparent;
+    background-color: rgb(82, 107, 250);
+    color: white;
+    width: 150px;
+    border-radius: 6px;
+}
+
+button.restart {
+    background-color: red;
+}
