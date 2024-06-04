@@ -1,0 +1,35 @@
+body {
+    display: grid;
+    place-items: center;
+    width: 98vw;
+    height: 97vh;
+    will-change: background-color;
+    transition: background-color .1s ease-in;
+}
+
+.flexbox {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+button {
+    background-color: #2424e6;
+    color: white;
+    font-size: large;
+    padding: 8px 16px;
+    outline: solid #2424e6;
+    border: solid transparent;
+    border-radius: 12px;
+}
+
+button:hover {
+    cursor: pointer;
+    border-color: white;
+}
+
+p {
+
+    font-size: xx-large;
+    padding: 6px 16px;
+}
