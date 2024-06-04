@@ -1,0 +1,21 @@
+body {
+    text-align: center;
+    font-size: larger;
+}
+
+main {
+    margin: 0 auto;
+    width: 600px;
+    height: 86vh;
+    padding: 34px 0;
+    background-color: rgb(241, 241, 241);
+}
+
+a {
+    display: block;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
