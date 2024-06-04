@@ -19,3 +19,7 @@ a {
 a:hover {
     text-decoration: underline;
 }
+
+.section a {
+    padding: 4px 0;
+}

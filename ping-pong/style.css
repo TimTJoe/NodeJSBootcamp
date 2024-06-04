@@ -1,0 +1,36 @@
+:root {
+    --width: 150px;
+    --x-speed: 13s;
+    --y-speed: 7s;
+    --transition-speed: 2.2s;
+}
+
+div {
+    width: var(--width);
+    height: var(--width);
+}
+
+
+.element {
+    background-color: black;
+}
+
+.x {
+    animation: x var(--x-speed) linear infinite alternate;
+}
+
+.y {
+    animation: y var(--y-speed) linear infinite alternate;
+}
+
+@keyframes x {
+    100% {
+        transform: translateX(calc(98vw - var(--width)));
+    }
+}
+
+@keyframes y {
+    100% {
+        transform: translateY(calc(100vh - var(--width)));
+    }
+}
