@@ -1,0 +1,26 @@
+body {
+    display: grid;
+    place-items: center;
+}
+
+label {
+    display: block;
+    padding: 12px 0;
+}
+
+input {
+    padding: 6px;
+    font: inherit;
+}
+
+button {
+    padding: 6px;
+    font: inherit;
+}
+
+#response {
+    padding: 6px;
+    margin: 6px 0;
+    background-color: rgb(245, 245, 245);
+}
+
