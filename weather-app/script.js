@@ -18,7 +18,7 @@ document.getElementById("time").innerHTML = new Date().toLocaleTimeString([], {
   minute: "2-digit",
 });
 
-window.addEventListener("DOMContentLoaded", () => {
+window.addEventListener("load", () => {
   navigator.geolocation.getCurrentPosition((position) => {
     const { latitude: lat, longitude: lon } = position.coords;
     fetchWeatherData(lat, lon);
