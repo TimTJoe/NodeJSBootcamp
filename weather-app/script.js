@@ -68,7 +68,6 @@ function updateWeatherUI(weatherData) {
   visibility.innerHTML = `${vis / 1000}km`;
   wind.innerHTML = `${wnd.speed}Mph`;
   rain.innerHTML = `${rn ? rn["1h"] : 0}mm`;
-  console.log(feelings);
   feelings.innerHTML = `Feels Like ${Math.trunc(
     ((main.feels_like - 273.15) * 9) / 5 + 32
   )}&deg;F`;
