@@ -11,8 +11,10 @@ window.addEventListener("DOMContentLoaded", () => {
 form.addEventListener("submit", (e) => {
   e.preventDefault();
   let text = document.getElementById("textarea").value;
+
   let date = new Date();
   date = date.toISOString().substring(0, 10);
+
   let note = { id: Date.now(), text, date };
   let response = createNote(note);
   displayNotes(response);
