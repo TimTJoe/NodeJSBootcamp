@@ -1,41 +1,75 @@
-let url =
-  "https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={API key}";
+const API_ID = "c058df98a7892301e6d1697fa71bb019";
+const WEATHER_API_URL = "https://api.openweathermap.org/data/2.5/weather";
+const GEOCODING_API_URL = "http://api.openweathermap.org/geo/1.0/direct";
+const cityInput = document.getElementById("city");
+const contentDegree = document.getElementById("contentDegree");
+const description = document.getElementById("description");
+const countryTag = document.getElementById("country");
+const icon = document.getElementById("contentIcon");
+const wind = document.getElementById("wind");
+const pressure = document.getElementById("pressure");
+const humidity = document.getElementById("humidity");
+const visibility = document.getElementById("visibility");
+const rain = document.getElementById("rain");
+const feelings = document.getElementById("feelings");
 
-let api_id = "c058df98a7892301e6d1697fa71bb019";
-
-let geocoding_api =
-  "http://api.openweathermap.org/geo/1.0/direct?q={city name}&appid={API key}";
-
-function getWeather(city) {}
+document.getElementById("time").innerHTML = new Date().toLocaleTimeString([], {
+  hour: "2-digit",
+  minute: "2-digit",
+});
 
 window.addEventListener("DOMContentLoaded", () => {
-  document.getElementById("form").addEventListener("submit", (e) => {
-    let city = document.getElementById("city").value;
-    let description = document.getElementById("city");
-    let icon = document.getElementById("icon");
-    let weather = document.getElementById("weather");
-
-    e.preventDefault();
-    fetch(
-      `http://api.openweathermap.org/geo/1.0/direct?q=${city}&appid=${api_id}`
-    )
-      .then((response) => response.json())
-      .then((geocode_data) => {
-        fetch(
-          `https://api.openweathermap.org/data/2.5/weather?lat=${geocode_data[0].lat}&lon=${geocode_data[0].lon}&appid=${api_id}`
-        )
-          .then((res) => res.json())
-          .then((weather_data) => {
-            //display data here
-            console.log(weather_data)
-            weather.innerHTML = weather_data.weather[0].main;
-            description.innerHTML = weather_data.weather[0].description;
-            icon.innerHTML = weather_data.weather[0].icon;
-
-            console.log(weather_data.weather[0]);
-          })
-          .catch((weather_error) => console.log(weather_error));
-      })
-      .catch((error) => console.log("error " + error));
+  navigator.geolocation.getCurrentPosition((position) => {
+    const { latitude: lat, longitude: lon } = position.coords;
+    fetchWeatherData(lat, lon);
   });
 });
+
+document.getElementById("form").addEventListener("submit", (e) => {
+  e.preventDefault();
+  fetchCityCoordinates(cityInput.value);
+});
+
+function fetchWeatherData(lat, lon) {
+  fetch(`${WEATHER_API_URL}?lat=${lat}&lon=${lon}&appid=${API_ID}`)
+    .then((res) => res.json())
+    .then(updateWeatherUI)
+    .catch(console.error);
+}
+
+function fetchCityCoordinates(city) {
+  fetch(`${GEOCODING_API_URL}?q=${city}&appid=${API_ID}`)
+    .then((res) => res.json())
+    .then((geocodeData) => {
+      const { lat, lon, state, name } = geocodeData[0];
+      countryTag.innerHTML = `${state}, ${name}`;
+      fetchWeatherData(lat, lon);
+    })
+    .catch(console.error);
+}
+
+function updateWeatherUI(weatherData) {
+  const {
+    weather,
+    main,
+    sys,
+    visibility: vis,
+    wind: wnd,
+    rain: rn,
+  } = weatherData;
+  countryTag.innerHTML = `${weatherData.name}, ${sys.country}`;
+  icon.src = `http://openweathermap.org/img/w/${weather[0].icon}.png`;
+  description.innerHTML = weather[0].description;
+  contentDegree.innerHTML = `${Math.trunc(
+    ((main.temp - 273.15) * 9) / 5 + 32
+  )}<sup>&deg;F</sup>`;
+  pressure.innerHTML = `${Math.trunc(main.pressure * 0.0009869233)}atm`;
+  humidity.innerHTML = `${main.humidity}%`;
+  visibility.innerHTML = `${vis / 1000}km`;
+  wind.innerHTML = `${wnd.speed}Mph`;
+  rain.innerHTML = `${rn ? rn["1h"] : 0}mm`;
+  console.log(feelings);
+  feelings.innerHTML = `Feels Like ${Math.trunc(
+    ((main.feels_like - 273.15) * 9) / 5 + 32
+  )}&deg;F`;
+}

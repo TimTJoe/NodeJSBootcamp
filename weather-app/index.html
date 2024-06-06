@@ -4,24 +4,61 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="style.css" />
-    <title>Document</title>
+    <title>Weather App</title>
   </head>
   <body>
-    <main class="main" id="main">
-      <form method="post" id="form">
-        <label for="city">Enter a City Name</label>
+    <header>
+      <form id="form">
+        <label for="city" class="visually-hidden">Search City</label>
         <input
           type="search"
           id="city"
-          placeholder="Eg: Monrovia, Ganta, Kakata."
+          placeholder="Search City. eg: Monrovia, Kakata, Ganta"
         />
-        <button type="submit" id="button">Search</button>
       </form>
-      <div id="response">
-        <p id="weather">Weather</p>
-        <p id="description">description</p>
-        <p id="icon">icon</p>
-      </div>
+    </header>
+    <main id="main">
+      <section class="current-weather">
+        <header>
+          <h1>Current Weather</h1>
+          <p id="country">Monsterrado County, LR</p>
+          <time id="time">10:00 PM</time>
+        </header>
+        <div class="weather-info">
+          <img
+            src="http://openweathermap.org/img/w/10d.png"
+            id="contentIcon"
+            alt="Weather Icon"
+          />
+          <h1 id="contentDegree">80<sup>&deg;C</sup></h1>
+          <span class="description">
+            <p id="description">Mostly Cloudy</p>
+            <small id="feelings">Feels Like 89 &deg;</small>
+          </span>
+        </div>
+      </section>
+      <section class="additional-info">
+        <div class="info-item">
+          <h2>Rain Per Hour</h2>
+          <p id="rain">...</p>
+        </div>
+        <div class="info-item">
+          <h2>Wind</h2>
+          <p id="wind">...</p>
+        </div>
+        <div class="info-item">
+          <h2>Humidity</h2>
+          <p id="humidity">...</p>
+        </div>
+        <div class="info-item">
+          <h2>Pressure at Sea</h2>
+          <p id="pressure">...</p>
+        </div>
+        <div class="info-item">
+          <h2>Visibility</h2>
+          <p id="visibility">...</p>
+        </div>
+      </section>
     </main>
     <script src="script.js"></script>
   </body>

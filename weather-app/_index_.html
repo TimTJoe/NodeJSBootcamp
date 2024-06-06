@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Weather-App</title>
+  </head>
+  <body>
+    <form method="post" id="form">
+      <section class="content">
+        <input type="search" id="city" placeholder="Search City." />
+      </section>
+    </form>
+    <main class="main" id="main">
+      <div class="main-body" id="mainBody">
+        <header class="body-header">
+          <span class="body-info">
+            <h3>Current Weather</h3>
+          </span>
+          <span class="body-country">
+            <h3 id="country">Monsterrado County</h3>
+          </span>
+          <span class="body-time">
+            <h4 id="time">10:00 PM</h4>
+          </span>
+        </header>
+        <section class="body-content">
+          <span class="content-icon">
+            <img
+              src="http://openweathermap.org/img/w/10d.png"
+              id="contentIcon"
+            />
+          </span>
+          <span class="content-degree" id="contentDegree"
+            ><sup id="degree"> &deg;C</sup>
+          </span>
+          <span class="content-description">
+            <h3 id="description">Mostly Cloudy</h3>
+          </span>
+        </section>
+      </div>
+      <div class="main-footer">
+        <span class="footer-section">
+          <i class="small">Rain Per Hour</i>
+          <i id="rain">45</i>
+        </span>
+        <span class="footer-section">
+          <i class="small">Wind</i>
+          <i id="wind">45</i>
+        </span>
+        <span class="footer-section">
+          <i class="small">Humidity</i>
+          <i id="humidity">45</i>
+        </span>
+        <span class="footer-section">
+          <i class="small">Pressure</i>
+          <i id="pressure">45</i>
+        </span>
+        <span class="footer-section">
+          <i class="small">Visibility</i>
+          <i id="visibility">45</i>
+        </span>
+      </div>
+      <!-- <div id="response">
+        <img src="/" id="icon" />
+        <p id="location"></p>
+        <p id="description"></p>
+        <p id="weather"></p>
+        <p id="name"></p>
+      </div> -->
+    </main>
+    <script src="script.js"></script>
+  </body>
+</html>
