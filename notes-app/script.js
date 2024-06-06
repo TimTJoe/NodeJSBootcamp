@@ -5,15 +5,7 @@ const time = document.getElementById("time");
 const body = document.getElementById("body");
 
 window.addEventListener("DOMContentLoaded", () => {
-  const deleteBtn = document.querySelectorAll(".deleteButton");
-
-  console.log(deleteBtn);
   displayNotes(JSON.parse(db.getItem("notes")));
-  deleteBtn?.forEach((button) => {
-    button.addEventListener("click", (e) => {
-      console.log(button.value);
-    });
-  });
 });
 
 form.addEventListener("submit", (e) => {
@@ -39,13 +31,14 @@ function createNote(note) {
   }
 }
 
-function deleteNote(id) {
-  let notes = db.getItem("notes");
+function deleteNotes(id) {
+  let notes = JSON.parse(db.getItem("notes"));
   if (notes == null) {
     return false;
   } else {
-    notes.filter((note) => note.id == id).splice(0, 1);
-    return true;
+    let updatedNotes = notes.filter((note) => note.id !== id);
+    db.setItem("notes", JSON.stringify(updatedNotes));
+    displayNotes(JSON.parse(db.getItem("notes")));
   }
 }
 
@@ -55,21 +48,22 @@ function displayNotes(notes) {
     ?.reverse()
     .map((note) => {
       let article = `
-      <article class="note" id="note">
-            <time id="note-time" id="time">${note.date}</time>
+      <article class="note note-section" id="note">
+        <div class="note-content">
+            <time class="note-time" id="time">${note.date}</time>
             <p class="note-body" id="body">${note.text}</p>
-            <footer class="note-footer" >
-              <button class="deleteButton" id=${note.id}>Delete</button>
-            </footer>
-          </article>
+        </div>
+        <footer class="note-footer" >
+          <button class="deleteButton" id=${note.id}>Delete</button>
+        </footer>
+      </article>
     `;
 
       content.insertAdjacentHTML("beforeend", article);
+      //add delete event to all items
       document.getElementById(note.id).addEventListener("click", (e) => {
-        // e.preventDefault()
-        deleteNote(note.id);
+        deleteNotes(note.id);
         window.location.reload();
-        console.log("clicked: " + note.id);
       });
     });
 }
