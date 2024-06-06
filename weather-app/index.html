@@ -61,5 +61,16 @@
       </section>
     </main>
     <script src="script.js"></script>
+    <script>
+      let form = document.getElementById("form");
+      form
+        .getElementById("form")
+        .addEventListener("keypress", function (event) {
+          if (event.keyCode === 13) {
+            event.preventDefault();
+            form.submit();
+          }
+        });
+    </script>
   </body>
 </html>
