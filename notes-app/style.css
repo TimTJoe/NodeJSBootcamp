@@ -7,15 +7,32 @@ main .header {
     padding: 6px;
     text-align: center;
     font-size: larger;
-    background-color: rgb(214, 214, 214);
+    background-color: #241e1eef;
+    color: blanchedalmond;
 }
 
 main .body {
     display: grid;
-    grid-template-columns: 350px 700px;
+    grid-template-columns: 300px 700px;
 }
 
 main .sidebar {
-    background-color: rgb(214, 214, 214);
+    background-color: #241e1eef;
     height: 98vh;
+    padding: 12px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+form button {
+    padding: 12px 0;
+    font-weight: bolder;
+}
+
+main .content {
+    padding: 12px;
 }
