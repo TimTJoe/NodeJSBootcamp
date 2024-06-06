@@ -18,12 +18,12 @@ document.getElementById("time").innerHTML = new Date().toLocaleTimeString([], {
   minute: "2-digit",
 });
 
-window.addEventListener("load", () => {
+// window.addEventListener("load", () => {
   navigator.geolocation.getCurrentPosition((position) => {
     const { latitude: lat, longitude: lon } = position.coords;
     fetchWeatherData(lat, lon);
   });
-});
+// });
 
 document.getElementById("form").addEventListener("submit", (e) => {
   e.preventDefault();
