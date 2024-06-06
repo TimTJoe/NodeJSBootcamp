@@ -15,6 +15,7 @@
           id="city"
           placeholder="Search City. eg: Monrovia, Kakata, Ganta"
         />
+        <!-- <button type="submit" id="button">Search</button> -->
       </form>
     </header>
     <main id="main">
@@ -63,15 +64,12 @@
     <script src="script.js"></script>
     <script>
       let form = document.getElementById("form");
-      form
-        .getElementById("form")
-        .addEventListener("keypress", function (event) {
-          if (event.keyCode === 13) {
-            event.preventDefault();
-            form.submit();
-            alert("enter key press");
-          }
-        });
+      form.addEventListener("keypress", function (event) {
+        if (event.keyCode === 13) {
+          event.preventDefault();
+          form.submit();
+        }
+      });
     </script>
   </body>
 </html>
