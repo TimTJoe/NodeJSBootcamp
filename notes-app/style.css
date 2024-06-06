@@ -35,4 +35,19 @@ form button {
 
 main .content {
     padding: 12px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+main .note {
+    width: 200px;
+    background-color: #ecececef;
+    padding: 6px;
+    overflow-wrap: break-word;
+}
+
+.note .note-footer {
+    display: flex;
+    gap: 6px;
 }
