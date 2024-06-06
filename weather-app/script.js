@@ -1,6 +1,6 @@
 const API_ID = "c058df98a7892301e6d1697fa71bb019";
 const WEATHER_API_URL = "https://api.openweathermap.org/data/2.5/weather";
-const GEOCODING_API_URL = "http://api.openweathermap.org/geo/1.0/direct";
+const GEOCODING_API_URL = "https://api.openweathermap.org/geo/1.0/direct";
 const cityInput = document.getElementById("city");
 const contentDegree = document.getElementById("contentDegree");
 const description = document.getElementById("description");
