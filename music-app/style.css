@@ -5,6 +5,11 @@
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     --spacing-sm: 12px;
     --spacing-lg: 24px;
+    --gray: #1B202A;
+    --blue-gray: #2E323D;
+    --lite-gray: #B8B9BB;
+    --dark-blue: #122153;
+    --indigo: #1C2136;
 }
 
 html {
@@ -15,24 +20,45 @@ body {
     height: 100%;
     display: flex;
     flex-direction: column;
+    background: linear-gradient(to right, var(--indigo), var(--dark-blue), var(--indigo));
+    color: var(--lite-gray);
 }
 
-body>header {
-    padding: var(--spacing-sm);
+main {
+    width: 80%;
+    margin: 0 auto;
+    height: inherit;
+}
+
+main h1 {
+    padding: var(--spacing-lg);
+}
+
+main .tabs {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+}
+
+.tabs .item {
+    border-radius: 8px;
+    background-color: var(--blue-gray);
+    width: 100%;
+    padding: 12px var(--spacing-lg);
+    display: flex;
+    justify-content: space-between;
+}
+
+.item h3 {
+    font-weight: normal;
 }
 
 
-main.grid {
-    display: grid;
-    grid-template-columns: 270px 1fr;
-}
-
-body>footer {
-    padding: var(--spacing-sm);
+footer {
     margin-top: auto;
-}
-
-.sidebar .item {
-    display: block;
-    padding: 8px;
+    position: fixed;
+    bottom: 0;
+    padding: var(--spacing-lg);
+    width: 100%;
+    border-top: thin solid rgb(2, 2, 2);
 }
