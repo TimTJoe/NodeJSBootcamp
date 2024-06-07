@@ -6,12 +6,10 @@ const submit = document.getElementById("button");
 window.onload = () => {
   displayNotes(JSON.parse(db.getItem("notes")));
   window.history.pushState({ id: null }, { name: "init" });
-  console.log(window.history.state.id)
 };
 
 form.addEventListener("submit", (e) => {
   e.preventDefault();
-  // let updateID = window.history.state.id || null;
   const text = document.getElementById("textarea").value;
 
   let date = getDate();
@@ -85,7 +83,7 @@ function displayNotes(notes) {
         let id = e.target.id.substring(1);
         textarea.value = note.text;
         submit.style.backgroundColor = "var(--orange)";
-        textarea.style.outline = "thin solid var(--xlite-gray)";
+        textarea.style.outline = "solid var(--xlite-gray)";
 
         window.history.pushState({ id }, { name: "edit note" });
       });
