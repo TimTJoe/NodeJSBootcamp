@@ -7,29 +7,30 @@
     <title>Notes App</title>
   </head>
   <body id="body">
-    <main id="main">
-      <header class="header">Notes Application</header>
-      <section class="body">
-        <aside class="sidebar">
-          <form class="form" method="post" action="" id="form">
-            <textarea
-              name="textarea"
-              id="textarea"
-              cols="30"
-              rows="10"
-              required
-            ></textarea>
-            <button id="button" class="button" type="submit" >
-              Create Note
-            </button>
-          </form>
-        </aside>
-        <div class="content" id="content">
-          <!-- notes -->
-        </div>
-      </section>
-      <footer class="footer">footer</footer>
-    </main>
+    <header class="header">Notes Application</header>
+    <section class="grid">
+      <aside class="sidebar">
+        <form class="form" method="post" action="" id="form">
+          <textarea
+            placeholder="Write Note..."
+            name="textarea"
+            id="textarea"
+            cols="30"
+            rows="10"
+            required
+            autofocus
+            minlength="20"
+            maxlength="600"
+          ></textarea>
+          <button id="button" class="button" type="submit">Save</button>
+        </form>
+      </aside>
+      <main class="main grid" id="content">
+      </main>
+    </section>
+    <footer class="footer">
+      &copy; <a href="http://www.github.com/timtjoe">Timothy T. Joe</a>
+    </footer>
     <script src="script.js"></script>
   </body>
 </html>
