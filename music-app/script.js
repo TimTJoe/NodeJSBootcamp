@@ -37,7 +37,8 @@ window.onload = () => {
       audio.src = music.url;
       title.innerHTML = music.title;
       audio.play();
-      let controls = (document.querySelector(".controls").src = PauseIcon);
+      let controls = document.querySelector(".controls");
+      controls.src = PauseIcon;
       controls.id = "play";
 
       document.getElementById("duration").innerHTML = audio.duration;
@@ -77,8 +78,6 @@ audio.addEventListener("timeupdate", (ev) => {
 });
 
 audio.addEventListener("ended", () => {
-  document.querySelector(".controls").src = PlayIcon
-  document.querySelector(".controls").id = "play"
-
-})
-
+  document.querySelector(".controls").src = PlayIcon;
+  document.querySelector(".controls").id = "play";
+});
