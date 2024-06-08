@@ -10,30 +10,20 @@
     <main class="main" id="main">
       <h1>Music Player</h1>
 
-      <div class="tabs">
-        <section class="item">
-          <h3 class="title">The Music Title</h3>
-          <span class="action">
-            <img class="icon" src="/" />
-          </span>
-          <h3 class="time" id="time"></h3>
-        </section>
-        <section class="item">
-          <h3 class="title ">The Music Title</h3>
-          <span class="action">
-            <img class="icon" src="/" />
-          </span>
-          <h3 class="time" id="time">3:00</h3>
-        </section>
+      <div class="tabs" id="list">
+        <!-- music list -->
       </div>
 
-      <audio controls src="assets/music/music1.mp3" id="audio"></audio>
-      <!-- <br />
-        <button class="button" id="play">Play</button>
-        <button class="button" id="repeat">Repeat</button>
-        <button class="button" id="pause">Pause</button> -->
+      <audio  src="assets/music/music1.mp3" id="audio"></audio>
     </main>
-    <footer class="footer" id="footer">&copy;Timothy T. Joe</footer>
-    <script src="script.js"></script>
+    <footer class="footer" id="footer">
+      <span class="item" id="name"></span>
+      <img class="item controls" src="./assets/img/play.svg" />
+      <span class="item" id="timer">
+        <span id="currentTime">3.51 </span> /
+        <span id="duration">3.68 </span>
+      </span>
+    </footer>
+    <script type="module" src="script.js"></script>
   </body>
 </html>

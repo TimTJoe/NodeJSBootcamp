@@ -10,6 +10,7 @@
     --lite-gray: #B8B9BB;
     --dark-blue: #122153;
     --indigo: #1C2136;
+    --orange: #EF7F36;
 }
 
 html {
@@ -46,11 +47,41 @@ main .tabs {
     width: 100%;
     padding: 12px var(--spacing-lg);
     display: flex;
-    justify-content: space-between;
+    align-items: center;
 }
 
-.item h3 {
+.tabs .item:hover {
+    color: var(--orange);
+    cursor: pointer;
+}
+
+.tabs .item .action {
+    width: 50px;
+}
+
+.tabs .item .action img {
+    visibility: hidden;
+    opacity: 0;
+    height: 30px;
+}
+
+.tabs .item:hover .action img,
+.tabs .item > .action.playing img {
+    visibility: visible;
+    opacity: 1;
+}
+
+
+.tabs .item h3 {
     font-weight: normal;
+}
+
+.tabs .item .title {
+    padding-left: var(--spacing-lg);
+}
+
+.tabs .item .time {
+    margin-left: auto;
 }
 
 
@@ -58,7 +89,30 @@ footer {
     margin-top: auto;
     position: fixed;
     bottom: 0;
-    padding: var(--spacing-lg);
+    padding: var(--spacing-sm);
     width: 100%;
     border-top: thin solid rgb(2, 2, 2);
+    background-color: var(--indigo);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--spacing-sm);
+    font-size: larger;
+}
+
+footer .item {
+    width: 200px;
+}
+
+
+footer .item.controls {
+    text-align: center;
+    height: 34px;
+    width: 30px;
+    cursor: pointer;
+}
+
+footer #duration {
+    text-align: right;
+    gap: 4px;
 }
