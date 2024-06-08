@@ -1,0 +1,53 @@
+* {
+    font-family: Arial, Helvetica, sans-serif;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    --dark-gray: #1E2024;
+    --indigo: #1A2031;
+    --light-gray: #CBCCD0;
+    --turquoise: #4CC2FF;
+    --blue-gray: #272C3F;
+}
+
+html {
+    height: 100%;
+}
+
+body {
+    height: 100%;
+    background: linear-gradient(to right, var(--dark-gray), var(--indigo), var(--blue-gray));
+    display: grid;
+    place-items: center;
+    text-align: center;
+    color: var(--light-gray);
+
+}
+
+.date {
+    font-size: larger;
+    text-align: center;
+    font-size: 3rem;
+}
+
+.flex {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    font-size: 6rem;
+}
+
+.flex #item {
+    width: 200px;
+}
+
+.flex #item h5 {
+    font-size: 3rem;
+    font-weight: normal;
+}
+
+.flex #item.meridiem {
+    align-self: center;
+    font-size: 3rem;
+    width: auto;
+}
