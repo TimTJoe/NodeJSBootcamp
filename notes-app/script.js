@@ -61,15 +61,7 @@ function displayNotes(notes) {
         <p class="body" id="body">
             ${note.text}
         </p>
-        <footer class="actions" >
-          <button class="edit" id="e${note.id}">
-            Edit
-          </button>
-          <button class="delete" id=${note.id}>
-            Delete
-          </button>
         
-        </footer>
       </article>
     `;
 

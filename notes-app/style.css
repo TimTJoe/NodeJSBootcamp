@@ -37,7 +37,7 @@ body {
 
 section.grid {
     display: grid;
-    grid-template-columns: 270px auto;
+    grid-template-columns: 270px auto 280px;
 }
 
 .sidebar {
@@ -89,6 +89,7 @@ button.orange:hover {
     border-radius: var(--spacing-sm);
     background-color: var(--dark-gray);
     height: 505px;
+    /* width: 505px; */
     margin-right: var(--spacing-sm);
     padding: var(--spacing-lg);
     overflow: auto;
@@ -113,12 +114,11 @@ main.grid h1 {
     background-color: var(--gray);
     color: var(--white);
     outline: thin solid var(--xlite-gray);
-    /* max-width: 300px; */
+    height: 200px;
     word-break: break-all;
     word-wrap: break-word;
     display: flex;
     flex-direction: column;
-    text-overflow: ellipsis;
 
 }
 
@@ -129,7 +129,25 @@ main.grid h1 {
     color: var(--xlite-gray);
 }
 
-.note footer {
+.note:hover {
+    outline: .6rem solid #1c5a7959;
+    cursor: pointer;
+}
+
+.viewer {
+    display: flex;
+    flex-direction: column;
+    margin-right: var(--spacing-sm);
+    color: var(--white);
+}
+
+.viewer .copy {
+    height: 450px;
+    overflow: auto;
+    scrollbar-width: thin;
+}
+
+.viewer footer {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -138,7 +156,7 @@ main.grid h1 {
     margin-top: auto;
 }
 
-.note footer button {
+.viewer footer button {
     flex-basis: 100%;
     padding: 8px 0;
     border: 0;
@@ -147,13 +165,13 @@ main.grid h1 {
     color: var(--white);
 }
 
-.note footer button:hover {
+.viewer footer button:hover {
     outline: 1px solid var(--xlite-gray);
     font-weight: bolder;
 
 }
 
-.note footer button.delete {
+.viewer footer button.delete {
     background-color: transparent;
     color: var(--orange);
 }
