@@ -67,10 +67,11 @@ body {
     padding: var(--spacing-sm) 0;
     border: 0;
     outline: 0;
-    border-radius: 6px;
+    border-radius: var(--spacing-sm);
     background-color: var(--turquoise);
     font-size: large;
     font-weight: bolder;
+    transition: transform .2s ease-in-out;
 }
 
 .form button:hover {
@@ -85,11 +86,14 @@ button.orange:hover {
     background-color: #eb610c;
 }
 
+button:focus {
+    transform: scale(.98);
+}
+
 .main {
     border-radius: var(--spacing-sm);
     background-color: var(--dark-gray);
     height: 505px;
-    /* width: 505px; */
     margin-right: var(--spacing-sm);
     padding: var(--spacing-lg);
     overflow: auto;
@@ -193,4 +197,30 @@ main.grid h1 {
 
 .footer a:hover {
     text-decoration: underline;
+}
+
+#toaster {
+    min-width: 250px;
+    border-radius: var(--spacing-sm);
+    padding: var(--spacing-sm);
+    position: fixed;
+    left: 20%;
+    bottom: 30px;
+    transform: translateX(-50%);
+    z-index: 2;
+    transition: visibility 0s, opacity 0.5s ease-in-out;
+    background-color: var(--dark-blue-gray);
+    color: var(--white);
+    box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.123);
+    text-align: center;
+}
+
+#toaster.visible {
+    visibility: visible;
+    opacity: 1;
+}
+
+#toaster.hidden {
+    visibility: hidden;
+    opacity: 0;
 }

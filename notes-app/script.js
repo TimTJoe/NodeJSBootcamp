@@ -2,8 +2,8 @@ const db = window.localStorage;
 const form = document.getElementById("form");
 const content = document.getElementById("content");
 const articleContainer = document.getElementById("content");
-const submit = document.getElementById("button");
 const submitBtn = document.getElementById("button");
+const toaster = document.getElementById("snackbar");
 
 /**
  * Adds a value to history.state
@@ -43,9 +43,9 @@ function clearState() {
  */
 function getAllNotes() {
   //get notes for localStorage
-  let notes = JSON.parse(db.getItem("notes"));
-  if (notes !== null || notes.length !== 0) {
-    return notes;
+  let allNotes = JSON.parse(db.getItem("notes"));
+  if (allNotes !== null || allNotes?.length !== 0) {
+    return allNotes;
   } else {
     return false;
   }
@@ -81,9 +81,13 @@ function findNote(noteId) {
   }
 }
 
+/**
+ * run codes when page loads
+ */
 window.onload = () => {
   renderNotes(getAllNotes());
-  // window.history.pushState({ id: null }, { name: "init" });
+  window.history.pushState({ id: null }, { name: "init" });
+  console.log("on load....")
 };
 
 /**
@@ -111,14 +115,23 @@ form.addEventListener("submit", (e) => {
   if (window.history.state.id !== null) {
     //update the note whose id is state.id
     updateNotes(window.history.state.id, newNote);
+    showToaster("Note updated successfully.");
+    setTimeout(() => {
+      // renderNotes(getAllNotes());
+    window.location.reload();
+    }, 800);
   } else {
     //add the new note and return the newest note
-    let newestNote = createNote(note);
+     createNote(newNote);
     //render all notes on page
-    renderNotes(getAllNotes());
+    showToaster("Note created successfully.");
+    console.log("created...")
+    setTimeout(() => {
+      // renderNotes(getAllNotes());
+    window.location.reload();
+    }, 800);
   }
   //reloads page
-  // window.location.reload();
 });
 
 /**
@@ -141,7 +154,7 @@ function createNote(newNote) {
     // return getAllNotes();
   } else {
     //add new note without deleting others
-    allNotes.push(note);
+    allNotes.push(newNote);
     //add updated note to localstorage
     db.setItem("notes", JSON.stringify(allNotes));
     //return the note just created
@@ -166,14 +179,16 @@ function deleteNotes(noteId) {
     //add this update note to the localstorage as string
     db.setItem("notes", JSON.stringify(updatedNotes));
     //display the update localstorage note data
-    renderNotes(getAllNotes());
-    //clear the state.id value
-    // window.history.state.id = null;
+    showToaster("Note was deleted.");
+    // renderNotes(getAllNotes());
+    setTimeout(() => {
+      window.location.reload();
+    }, 800);
     //reload the page to update the DOM
-    window.location.reload();
   } else {
     //display message if not is empty
     console.log("no note in localstorage.");
+    clearState();
   }
 }
 
@@ -197,13 +212,13 @@ function renderNotes(notes) {
    *
    */
   notes
-    ?.sort((a, b) => new Date(a.date) - new Date(b.date))
+    ?.sort((a, b) => new Date(a.modifiedAt) - new Date(b.modifiedAt))
     ?.reverse()
     .map((note) => {
       let article = `
       <article class="note" id="${note.id}">
         <header>
-            <time class="time" id="time">${note.date}</time>
+            <time class="time" id="time">${note.createdAt}</time>
         </header>
         <p class="body" id="body">
             ${note.text.substring(0, 250) + " ..."}
@@ -227,6 +242,8 @@ function renderNotes(notes) {
         document.getElementById("viewer").style.display = "flex";
       });
     });
+  //clear state
+  clearState();
 }
 
 /**
@@ -266,13 +283,11 @@ function updateNotes(noteId, newNote) {
   //change the text value of the note at the given index
   savedNotes[index].text = newNote.text;
   //change the date value of the note at the given index
-  savedNotes[index].date = getDate();
+  savedNotes[index].modifiedAt = getDate();
   //save the updated note object to localstorage
   db.setItem("notes", JSON.stringify(savedNotes));
-  //clear the state.id value
-  // window.history.state.id = null;
   //reloads the page
-  window.location.reload();
+  // window.location.reload();
 }
 
 /**
@@ -280,6 +295,8 @@ function updateNotes(noteId, newNote) {
  * @param {String} id Id of note to read
  */
 function readNote(noteId) {
+  //set state.id
+  setState(noteId);
   let copyDiv = document.getElementById("copy");
   //find note with the noteId
   let foundNote = findNote(noteId);
@@ -309,7 +326,7 @@ document.getElementById("edit").addEventListener("click", (e) => {
   //change form submit button text value
   submitBtn.innerHTML = "Update";
   //add orange outline to textarea
-  textarea.style.outline = "solid var(--orane)";
+  textarea.style.outline = "solid var(--orange)";
 });
 
 /**
@@ -320,3 +337,18 @@ document.getElementById("delete").addEventListener("click", (e) => {
   //delete note that marches the state.id value
   deleteNotes(window.history.state.id);
 });
+
+/**
+ * display a toaster with message
+ *
+ * @param {String} message message to display in the toaster
+ */
+function showToaster(message) {
+  const toasterDiv = document.getElementById("toaster");
+  toasterDiv.innerHTML = message;
+  toasterDiv.classList.remove("hidden");
+  toasterDiv.classList.add("visible");
+  setTimeout(() => {
+    toasterDiv.classList.remove("visible");
+  }, 4000);
+}
