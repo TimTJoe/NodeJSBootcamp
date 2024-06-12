@@ -23,7 +23,7 @@ function setState(value) {
  */
 function clearState() {
   //check if state.id is set
-  if (window.history.state.id) {
+  if (window.history.state?.id) {
     //if so, re-set it to null
     window.history.state.id = null;
   } else {
@@ -112,14 +112,14 @@ form.addEventListener("submit", (e) => {
 
   //check if state.id isn't null
   //if it is, then create new note in localstorage
-  if (window.history.state.id !== null) {
+  if (window.history.state?.id !== null) {
     //update the note whose id is state.id
     updateNotes(window.history.state.id, newNote);
     showToaster("Note updated successfully.");
     setTimeout(() => {
       // renderNotes(getAllNotes());
     window.location.reload();
-    }, 800);
+    }, 1000);
   } else {
     //add the new note and return the newest note
      createNote(newNote);
@@ -129,7 +129,7 @@ form.addEventListener("submit", (e) => {
     setTimeout(() => {
       // renderNotes(getAllNotes());
     window.location.reload();
-    }, 800);
+    }, 1000);
   }
   //reloads page
 });
@@ -183,7 +183,7 @@ function deleteNotes(noteId) {
     // renderNotes(getAllNotes());
     setTimeout(() => {
       window.location.reload();
-    }, 800);
+    }, 1000);
     //reload the page to update the DOM
   } else {
     //display message if not is empty
@@ -335,7 +335,7 @@ document.getElementById("edit").addEventListener("click", (e) => {
  */
 document.getElementById("delete").addEventListener("click", (e) => {
   //delete note that marches the state.id value
-  deleteNotes(window.history.state.id);
+  deleteNotes(window.history.state?.id);
 });
 
 /**
@@ -350,5 +350,5 @@ function showToaster(message) {
   toasterDiv.classList.add("visible");
   setTimeout(() => {
     toasterDiv.classList.remove("visible");
-  }, 4000);
+  }, 1000);
 }
