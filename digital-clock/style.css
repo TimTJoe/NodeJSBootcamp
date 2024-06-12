@@ -8,6 +8,12 @@
     --light-gray: #CBCCD0;
     --turquoise: #4CC2FF;
     --blue-gray: #272C3F;
+    --spacing-xs: 8px;
+    --spacing-sm: 12px;
+    --spacing-md: 16px;
+    --spacing-lg: 24px;
+
+    --bg-gradient: linear-gradient(to right, var(--dark-gray), var(--indigo), var(--blue-gray))
 }
 
 html {
@@ -16,38 +22,126 @@ html {
 
 body {
     height: 100%;
-    background: linear-gradient(to right, var(--dark-gray), var(--indigo), var(--blue-gray));
+    background: var(--bg-gradient);
+    display: grid;
+    grid-template-columns: 278px 1fr;
+    color: var(--light-gray);
+}
+
+a {
+    color: var(--turquoise);
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+button {
+    cursor: pointer;
+    font: inherit;
+    transition: transform .2s ease-in-out;
+}
+
+button:focus {
+    transform: scale(.98);
+}
+
+button:disabled {
+    cursor: not-allowed;
+}
+
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--indigo);
+}
+
+.sidebarBtnContainer {
+    flex-basis: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding: var(--spacing-xs);
+}
+
+.sidebarBtn {
+    width: 100%;
+    padding: var(--spacing-xs);
+    outline: 0;
+    border: 0;
+    background-color: transparent;
+    color: var(--white);
+    border-radius: 8px;
+    text-align: left;
+    font-size: small;
+}
+
+
+.sidebarBtn:hover {
+    background-color: var(--blue-gray);
+    text-decoration: none;
+}
+
+.mainHeader,
+.mainFooter {
+    padding: var(--spacing-xs);
+    color: var(--turquoise);
+    font-size: small;
+}
+
+
+
+.mainContainer {
+    padding: var(--spacing-lg);
+    background-color: var(--dark-gray);
+}
+
+.timeContainer {
     display: grid;
     place-items: center;
-    text-align: center;
-    color: var(--light-gray);
-
+    height: 100%;
+    align-content: center;
 }
 
-.date {
-    font-size: larger;
+.timeText {
+    display: inl;
     text-align: center;
     font-size: 3rem;
 }
 
-.flex {
-    display: flex;
-    align-items: center;
-    text-align: center;
-    font-size: 6rem;
+h3.timeText {
+    padding-bottom: var(--spacing-lg);
 }
 
-.flex #item {
-    width: 200px;
+h1.timeText {
+    font-size: 10rem;
 }
 
-.flex #item h5 {
-    font-size: 3rem;
-    font-weight: normal;
+/* STOPWATCH PAGE STYLES */
+
+.stopwatchContainer {
+    height: 100%;
+    display: grid;
+    place-items: center;
+    align-content: center;
 }
 
-.flex #item.meridiem {
-    align-self: center;
-    font-size: 3rem;
-    width: auto;
+.stopwatchTimer {
+    font-size: 10rem;
 }
+
+.stopwatchBtn {
+    padding: var(--spacing-xs) var(--spacing-lg);
+    font-size: small;
+    text-transform: capitalize;
+    font-weight: bold;
+    outline: none;
+    border: none;
+    border-radius: var(--spacing-xs);
+    min-width: 100px;
+    background-color: var(--blue-gray);
+    color: var(--turquoise);
+}
+
+.stopwatchBtn.reset {}

@@ -23,15 +23,18 @@
       </footer>
     </aside>
     <main class="mainContainer" id="mainContainer">
-      <section class="timeContainer">
-        <h3 class="timeText" id="date">
-          <!-- date is programmatically appended -->
-        </h3>
-        <h1 class="timeText" id="time">
-          <!-- time is programmatically appended -->
-        </h1>
+      <section class="stopwatchContainer">
+        <div class="stopwatchTimer">
+          <span id="stopwatchHour">00</span>:<span id="stopwatchMin">00</span
+          >:<span id="stopwatchSec">00</span>
+        </div>
+        <section class="buttonGroup">
+          <button class="stopwatchBtn" id="startStopwatch">Start</button>
+          <button class="stopwatchBtn reset" id="pauseStopwatch">Pause</button>
+          <button class="stopwatchBtn reset" id="resetStopwatch">reset</button>
+        </section>
       </section>
     </main>
-    <script type="module" src="script.js"></script>
+    <script type="module" src="stopwatch.js"></script>
   </body>
 </html>
