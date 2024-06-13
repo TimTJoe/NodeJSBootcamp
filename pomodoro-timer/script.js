@@ -1,79 +1,78 @@
-//refence select element from HTML
-let pomodoroBtn = document.getElementById("pomodoroBtn");
-let longBreakBtn = document.getElementById("longBreakBtn");
-let shortBreakBtn = document.getElementById("shortBreakBtn");
-let startBtn = document.getElementById("startBtn");
-let pauseBtn = document.getElementById("pauseBtn");
-let restartBtn = document.getElementById("restartBtn");
 let timerText = document.getElementById("timerText");
+
+let snackbar = document.getElementById("snackbar");
+let snackbarMsg = document.getElementById("snackbarMsg");
+let snackbarBtn = document.getElementById("snackbarBtn");
+
+let startBreakBtn = document.getElementById("startBreakBtn");
+let startSessionBtn = document.getElementById("startSessionBtn");
+
+let seconds = 5;
+let workMinutes = 3;
+let breakMinutes = 5;
+let breakCount = 0;
 let timerInterval;
 
-let workDuration = 1; //alway 25
-let breakDuration = 5; //dynamic
-let seconds = 60; //always 60
-let workMinutes = workDuration - 1; //work minutes will always be the duration - 1
-let breakMinutes = breakDuration - 1; //comes after a work session, will aways be
-let breakCount = 0; //dynamic but never cross two
-
-function remainingTime() {
-  //decrement the current second value
-  seconds = seconds - 1;
-  //check if second reach 1 min
+function startTimer() {
+  seconds = --seconds;
   if (seconds === 0) {
-    //create the work minutes by 1
-    workMinutes = workMinutes - 1;
-    //check it workminutes is 0
-    if (workMinutes === -1) {
-      //check if break time is 1
-      if (breakCount % 2 == 0) {
-        //asigned the breakMinutes to workminutes
-        //this will make the session be a break session
-        workMinutes = breakMinutes;
-        //increment the break session after a break session is complete
+    workMinutes = --workMinutes;
+    if (workMinutes === 0) {
+      workMinutes = breakMinutes - 1;
+      if (breakCount % 2 === 0) {
+        workMinutes = workMinutes - 1;
         breakCount++;
       } else {
-        //decrement the work minutes by 1
-        workMinutes = breakDuration - 1;
-        //increment the breakcount to indicate
-        //that a work session just completed
+        workMinutes = --workMinutes;
         breakCount++;
       }
     }
-    //set second back to 60
-    seconds = 60;
+    seconds = 5;
   }
-  //add the work minutes and seconds to html
-  timerText.innerHTML = workMinutes + " : " + seconds;
+  timerText.innerHTML =
+    String(workMinutes).padStart(2, "0") +
+    " : " +
+    String(seconds).padStart(2, "0");
+  pauseBtn.disabled = false;
 }
-
-longBreakBtn.addEventListener("click", () => {
-  breakMinutes = 15 - 1;
-});
-shortBreakBtn.addEventListener("click", () => {
-  breakMinutes = 5 - 1;
-});
-pomodoroBtn.addEventListener("click", () => {
-  workDuration = 25 - 1;
-});
-
-function startTimer() {
-  console.log(workDuration);
-  console.log(breakMinutes);
+function pauseTimer() {
+  startSessionBtn.disabled = true;
+  pauseBtn.disabled = true;
+  restartBtn.disabled = false;
+  clearInterval(timerInterval);
+}
+function restartTimer() {
+  clearInterval(timerInterval);
+  workMinutes = getBreakMinutes();
+  seconds = 60 - 1;
+  timerText.innerHTML =
+    String(workMinutes).padStart(2, "0") +
+    " : " +
+    String(seconds).padStart(2, "0");
+  startSessionBtn.disabled = false;
+  pauseBtn.disabled = true;
+  restartBtn.disabled = true;
   timerInterval = setInterval(() => {
-    remainingTime();
+    startTimer();
   }, 1000);
 }
 
-pauseBtn.addEventListener("click", () => {
-  clearInterval(timerInterval);
+function getBreakMinutes() {
+  let breakTimeList = document.getElementById("breakTimeList");
+  return breakTimeList.options[breakTimeList.selectedIndex].value;
+}
+
+startSessionBtn.addEventListener("click", () => {
+  startSessionBtn.disabled = true;
+  timerInterval = setInterval(() => {
+    startTimer();
+  }, 1000);
 });
 
-startBtn.addEventListener("click", () => {
-  startTimer();
+pauseBtn.addEventListener("click", () => {
+  pauseTimer();
 });
 
 restartBtn.addEventListener("click", () => {
-    timerText.innerHTML = "00:00";
-    startTimer()
-    clearInterval(timerInterval)
+  restartTimer();
 });

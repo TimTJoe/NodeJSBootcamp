@@ -1,0 +1,125 @@
+body {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--gray);
+    color: var(--white);
+}
+
+.footer,
+.header {
+    padding: var(--spacing-sm);
+    color: var(--turquoise);
+}
+
+
+main {
+    flex-basis: 100%;
+    display: grid;
+    place-items: center;
+}
+
+.timerContainer {
+    border-radius: var(--spacing-sm);
+    text-align: center;
+    min-width: 551px;
+}
+
+.timerContainerHeader {
+    display: flex;
+    justify-content: space-between;
+}
+
+.buttonGroup {
+    display: flex;
+    gap: var(--spacing-sm);
+}
+
+.buttonGroup>* {
+    flex-basis: 100%;
+}
+
+button {
+    padding: 12px var(--spacing-md);
+    min-width: 100px;
+    outline: none;
+    border: none;
+    border-radius: 12px;
+    text-transform: capitalize;
+    transition: all .3s ease-in-out;
+    background-color: var(--dark-blue-gray);
+    color: var(--turquoise);
+    cursor: pointer;
+    font-weight: bold;
+}
+
+button.smallBtn {
+    padding: 8px;
+    font-size: small;
+    font-weight: normal;
+    box-shadow: 4px 2px 5px #00000031;
+}
+
+button:focus {
+    transform: scale(.98);
+}
+
+
+button.primaryBtn {
+    background-color: var(--turquoise);
+    color: var(--dark-gray);
+}
+
+button:disabled {
+    cursor: no-drop;
+    background-color: var(--lite-gray);
+    color: var(--xlite-gray);
+}
+
+.timerSection {
+    font-size: 10rem;
+    padding: var(--spacing-md);
+    background-color: var(--lite-gray);
+    margin: var(--spacing-md) 0;
+    border-radius: var(--spacing-md);
+    color: var(--turquoise);
+}
+
+.snackbar {
+    position: fixed;
+    bottom: 23px;
+    right: 30px;
+    min-width: 250px;
+    height: auto;
+    background-color: var(--xlite-gray);
+    border-radius: var(--spacing-md);
+    padding: var(--spacing-sm);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--spacing-sm);
+    transition: visibility 0s, opacity 0.5s ease-in-out;
+    box-shadow: 4px 2px 5px #00000031;
+}
+
+.snackbar.hidden {
+    visibility: hidden;
+    opacity: 0;
+}
+
+.snackbar.visible {
+    visibility: visible;
+    opacity: 1;
+}
+
+.timerContainerHeader h2 {
+    font-weight: 400;
+}
+
+input {
+    padding: 6px;
+    border-radius: var(--spacing-sm);
+    background-color: var(--gray);
+    color: var(--white);
+    outline: none;
+    border: solid var(--dark-blue-gray);
+}
