@@ -7,8 +7,8 @@ let snackbarBtn = document.getElementById("snackbarBtn");
 let startBreakBtn = document.getElementById("startBreakBtn");
 let startSessionBtn = document.getElementById("startSessionBtn");
 
-let seconds = 5;
-let workMinutes = 3;
+let seconds = 60;
+let workMinutes = 25;
 let breakMinutes = 5;
 let breakCount = 0;
 let timerInterval;
@@ -27,7 +27,7 @@ function startTimer() {
         breakCount++;
       }
     }
-    seconds = 5;
+    seconds = 6;
   }
   timerText.innerHTML =
     String(workMinutes).padStart(2, "0") +
