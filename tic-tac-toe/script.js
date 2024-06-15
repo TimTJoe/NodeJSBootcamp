@@ -2,29 +2,31 @@ let mark = "x";
 let boxes = document.querySelectorAll(".box");
 let winningOptions = ["123", "147", "159", "258", "369", "357", "456", "789"];
 let computerMoves = 0;
-let HumanMoves = 0;
+let humanMoves = 0;
+let humanChoices = [];
+let computerChoices = [];
+const db = window.localStorage;
+let overlay = document.getElementById("overlay");
+let overlayMsg = document.getElementById("overlay-msg");
+let replayBtn = document.getElementById("replay-btn");
+
+window.onload = () => {
+  displayResult();
+};
 
 boxes.forEach((box) => {
   box.addEventListener("click", (event) => {
     if (isHuman()) {
       playHuman(event);
-      endGame();
     }
     if (isComputer()) {
       setTimeout(() => {
         playComputer();
-        endGame();
       }, 2000);
     }
+    checkDraw(humanMoves, computerMoves);
   });
 });
-
-function isEmpty(nodeId) {
-  if (document.getElementById(nodeId).innerText === "") {
-    return true;
-  }
-  return false;
-}
 
 function switchTurn() {
   let turnText = document.getElementById("turn-text");
@@ -49,7 +51,9 @@ function isComputer() {
 
 function playHuman(node) {
   node.target.innerText = "X";
-  ++HumanMoves;
+  humanChoices.push(node.target.id);
+  checkGameStatus(humanChoices);
+  humanMoves++;
   switchTurn();
 }
 
@@ -58,19 +62,116 @@ function playComputer() {
     let randomNum = Math.floor(Math.random() * 9);
     if (boxes[randomNum].innerText === "") {
       boxes[randomNum].innerText = "O";
+      computerChoices.push(boxes[randomNum].id);
+      checkGameStatus(computerChoices);
       break;
-    } else if (computerMoves == 4) {
+    } else if (computerMoves === 4) {
       break;
     }
   }
-  ++computerMoves;
+  computerMoves++;
   switchTurn();
 }
 
-function endGame() {
-  if (HumanMoves === 5) {
-    alert("human moves ends...");
-  } else if (computerMoves == 4) {
-    alert("computer move ends...");
+function checkWin(playerChoices) {
+  const indexesToCheck = [
+    [0, 1, 2],
+    [1, 2, 3],
+    [2, 3, 4],
+  ];
+
+  for (const indexes of indexesToCheck) {
+    if (indexes.every((index) => index < playerChoices.length)) {
+      const option = indexes
+        .map((index) => playerChoices[index])
+        .sort()
+        .join("");
+      if (winningOptions.includes(option)) {
+        return true;
+      }
+    }
+  }
+
+  return false;
+}
+// Call this function after each move to check for a win
+function checkGameStatus() {
+  const humanWon = checkWin(humanChoices);
+  const computerWon = checkWin(computerChoices);
+
+  if (humanWon) {
+    updateResult("human");
+    endGame("Human win!");
+  } else if (computerWon) {
+    updateResult("computer");
+    endGame("Computer win!");
+  } else {
+    console.log("No winner yet!");
   }
 }
+
+function checkDraw(humanMoves, computerMoves) {
+  const totalMoves = humanMoves + computerMoves;
+  const maxMoves = 9; // Total number of cells in a Tic Tac Toe board
+
+  if (totalMoves >= maxMoves) {
+    const humanWon = checkWin(humanChoices);
+    const computerWon = checkWin(computerChoices);
+
+    // If neither player has won, it's a draw
+    if (!humanWon && !computerWon) {
+      updateResult("draw");
+      endGame("Game draw!");
+      console.log("Game draw!");
+      return true;
+    } else {
+      return false;
+    }
+  }
+}
+
+function updateResult(winner) {
+  let wins = db.getItem(winner);
+  if (wins !== null) {
+    wins = Math.trunc(wins);
+    db.setItem(winner, ++wins);
+  } else {
+    db.setItem(winner, 1);
+  }
+  displayResult();
+}
+
+function displayResult() {
+  const humanScores = db.getItem("human");
+  const drawScores = db.getItem("draw");
+  const computerScores = db.getItem("computer");
+  document.getElementById("human-score").innerHTML = `Human: ${
+    humanScores || 0
+  }`;
+  document.getElementById("computer-score").innerHTML = `Computer: ${
+    computerScores || 0
+  }`;
+  document.getElementById("draw-score").innerHTML = `Draw: ${drawScores || 0}`;
+}
+
+function endGame(message) {
+  overlay.classList.remove("hidden");
+  overlay.classList.add("visible");
+  overlayMsg.innerHTML = message;
+}
+
+function replayGame() {
+  computerMoves = 0;
+  humanMoves = 0;
+  humanChoices = [];
+  computerChoices = [];
+
+  overlay.classList.remove("visible");
+  overlay.classList.add("hidden");
+
+  boxes.forEach((box) => (box.innerText = ""));
+}
+
+replayBtn.addEventListener("click", () => {
+  replayGame();
+});
