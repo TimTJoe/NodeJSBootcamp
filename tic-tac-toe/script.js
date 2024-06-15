@@ -9,6 +9,13 @@ const db = window.localStorage;
 let overlay = document.getElementById("overlay");
 let overlayMsg = document.getElementById("overlay-msg");
 let replayBtn = document.getElementById("replay-btn");
+let audioTag = document.getElementById("audio");
+let audioSrc = [
+  "./assets/audio/click.wav",
+  "./assets/audio/error.wav",
+  "./assets/audio/game_end.mp3",
+];
+let isGameOn = true;
 
 window.onload = () => {
   displayResult();
@@ -18,10 +25,12 @@ boxes.forEach((box) => {
   box.addEventListener("click", (event) => {
     if (isHuman()) {
       playHuman(event);
+      playSound("Human");
     }
     if (isComputer()) {
       setTimeout(() => {
         playComputer();
+        playSound("Computer");
       }, 2000);
     }
     checkDraw(humanMoves, computerMoves);
@@ -158,6 +167,11 @@ function endGame(message) {
   overlay.classList.remove("hidden");
   overlay.classList.add("visible");
   overlayMsg.innerHTML = message;
+  audioTag.src = audioSrc[2];
+  setTimeout(() => {
+    audioTag.play();
+    isGameOn = true;
+  }, 1000);
 }
 
 function replayGame() {
@@ -175,3 +189,16 @@ function replayGame() {
 replayBtn.addEventListener("click", () => {
   replayGame();
 });
+
+function playSound(player) {
+  if (player == "Computer") {
+    audioTag.src = audioSrc[0];
+    audioTag.play();
+  } else if (player == "Human") {
+    audioTag.src = audioSrc[1];
+    audioTag.play();
+  } else if (player === "End") {
+    audioTag.src = audioSrc[2];
+    audioTag.play();
+  }
+}
