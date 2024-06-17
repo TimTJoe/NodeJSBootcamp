@@ -1,0 +1,39 @@
+@import url("../root.css");
+
+* {
+    padding: 0;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+header,
+footer {
+    padding: 12px;
+}
+
+main {
+    padding: 0 12px;
+    flex-basis: 100%;
+}
+
+fieldset {
+    width: 600px;
+    margin: 12px auto;
+    padding: 12px;
+}
+
+small {
+    color: red;
+    font-family: monospace;
+}
+
+h3 {
+    padding: 12px 0;
+}
+
+span {
+    color: green;
+}

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Ceasar-Cipher</title>
+  </head>
+  <body>
+    <header>Ceasar-Cipher</header>
+    <main>
+      <fieldset>
+        <input
+          type="text"
+          name="encryptionText"
+          id="encryptionText"
+          placeholder="Enter Text"
+        />
+        <input
+          type="number"
+          name="encryptionKey"
+          id="encryptionKey"
+          placeholder="Enter encryption key"
+        />
+        <button id="encryptionBtn">Encrypt</button>
+        <h3>Result: <span id="encryptionResult"></span></h3>
+        <small id="encryptionError"></small>
+      </fieldset>
+      <fieldset>
+        <input
+          type="text"
+          name="decryptionText"
+          id="decryptionText"
+          placeholder="Enter encrypted text"
+        />
+        <input
+          type="number"
+          name="decryptionKey"
+          id="decryptionKey"
+          placeholder="Enter encryption key"
+        />
+        <button id="decryptionBtn">Decrypt</button>
+
+        <h3>Result: <span id="decryptionResult"></span></h3>
+        <small id="decryptionError"></small>
+      </fieldset>
+    </main>
+    <footer>&copy; Timothy T. Joe</footer>
+    <script type="module" src="script.js"></script>
+  </body>
+</html>
