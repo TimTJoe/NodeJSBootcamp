@@ -1,3 +1,54 @@
+let mainContentDiv = getElementById("mainContent");
+let renderDecryptionFieldsBtn = getElementById("renderDecryptionFields");
+let renderEncryptionFieldsBtn = getElementById("renderEncryptionFields");
+
+let encryptionForm = `
+        <fieldset>
+        <input
+          type="text"
+          name="decryptionText"
+          id="decryptionText"
+          placeholder="Enter encrypted text"
+        />
+        <input
+          type="number"
+          name="decryptionKey"
+          id="decryptionKey"
+          placeholder="Enter encryption key"
+        />
+        <button id="decryptionBtn">Decrypt</button>
+
+        <h3>Result: <span id="decryptionResult"></span></h3>
+        <small id="decryptionError"></small>
+      </fieldset>
+  `;
+
+let decryptionForm = `
+        <fieldset>
+        <input
+          type="text"
+          name="encryptionText"
+          id="encryptionText"
+          placeholder="Enter Text"
+        />
+        <input
+          type="number"
+          name="encryptionKey"
+          id="encryptionKey"
+          placeholder="Enter encryption key"
+        />
+        <button id="encryptionBtn">Encrypt</button>
+        <h3>Result: <span id="encryptionResult">a span text</span></h3>
+        <small id="encryptionError"></small>
+      </fieldset>
+  `;
+
+window.onload = () => {
+  mainContentDiv.innerHTML = encryptionForm;
+  renderEncryptionFieldsBtn.classList.add("active");
+  renderDecryptionFieldsBtn.classList.remove("active");
+};
+
 function encrypt(text, key) {
   let isKeyValid = validateKey(key);
   let encryptedText = "";
@@ -15,7 +66,7 @@ function encrypt(text, key) {
       }
     }
   }
-  getElementById("encryptionResult").innerHTML = encryptedText;
+  // getElementById("encryptionResult").innerHTML = encryptedText;
 }
 function decrypt(text, key) {
   let isKeyValid = validateKey(key);
@@ -29,20 +80,10 @@ function decrypt(text, key) {
       decryptedText += String.fromCharCode(charCode);
     }
   }
-  getElementById("decryptionResult").innerHTML = decryptedText;
+  // getElementById("decryptionResult").innerHTML = decryptedText;
 }
 
-getElementById("encryptionBtn").addEventListener("click", () => {
-  let encryptionText = getValue("encryptionText");
-  let encryptionKey = getValue("encryptionKey");
-  encrypt(encryptionText, encryptionKey);
-});
-
-getElementById("decryptionBtn").addEventListener("click", () => {
-  let decryptionText = getValue("decryptionText");
-  let decryptionKey = getValue("decryptionKey");
-  decrypt(decryptionText, decryptionKey);
-});
+window.addEventListener("DOMContentLoaded", (e) => {});
 
 function getValue(nodeId) {
   return document.getElementById(nodeId).value;
@@ -61,3 +102,30 @@ function validateKey(key) {
     return { status: true, message: null };
   }
 }
+
+renderEncryptionFieldsBtn.addEventListener("click", (event) => {
+  event.preventDefault();
+  renderDecryptionFieldsBtn.classList.remove("active");
+  renderEncryptionFieldsBtn.classList.add("active");
+  mainContentDiv.innerHTML = encryptionForm;
+
+  getElementById("encryptionBtn").addEventListener("click", () => {
+    let encryptionText = getValue("encryptionText");
+    let encryptionKey = getValue("encryptionKey");
+    encrypt(encryptionText, encryptionKey);
+  });
+});
+
+getElementById("renderDecryptionFields").addEventListener("click", (event) => {
+  event.preventDefault();
+  renderDecryptionFieldsBtn.classList.add("active");
+  renderEncryptionFieldsBtn.classList.remove("active");
+  mainContentDiv.innerHTML = decryptionForm;
+
+  getElementById("decryptionBtn").addEventListener("click", () => {
+    alert("dectypt")
+    let decryptionText = getValue("decryptionText");
+    let decryptionKey = getValue("decryptionKey");
+    decrypt(decryptionText, decryptionKey);
+  });
+});

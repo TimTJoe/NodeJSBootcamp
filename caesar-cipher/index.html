@@ -7,43 +7,20 @@
     <title>Ceasar-Cipher</title>
   </head>
   <body>
-    <header>Ceasar-Cipher</header>
-    <main>
-      <fieldset>
-        <input
-          type="text"
-          name="encryptionText"
-          id="encryptionText"
-          placeholder="Enter Text"
-        />
-        <input
-          type="number"
-          name="encryptionKey"
-          id="encryptionKey"
-          placeholder="Enter encryption key"
-        />
-        <button id="encryptionBtn">Encrypt</button>
-        <h3>Result: <span id="encryptionResult"></span></h3>
-        <small id="encryptionError"></small>
-      </fieldset>
-      <fieldset>
-        <input
-          type="text"
-          name="decryptionText"
-          id="decryptionText"
-          placeholder="Enter encrypted text"
-        />
-        <input
-          type="number"
-          name="decryptionKey"
-          id="decryptionKey"
-          placeholder="Enter encryption key"
-        />
-        <button id="decryptionBtn">Decrypt</button>
-
-        <h3>Result: <span id="decryptionResult"></span></h3>
-        <small id="decryptionError"></small>
-      </fieldset>
+    <header class="mainHeader">
+      <h3 class="siteName">Ceasear Cipher</h3>
+      <nav class="headerNav">
+        <button class="headerNavItem active" id="renderEncryptionFields">
+          Encrypt
+        </button>
+        <button class="headerNavItem" id="renderDecryptionFields">
+          Decrypt
+        </button>
+      </nav>
+      <h3 class="siteCopyright">&copy; Tim. T. Joe</h3>
+    </header>
+    <main id="mainContent">
+      <h4>Encrypt a text.</h4>
     </main>
     <footer>&copy; Timothy T. Joe</footer>
     <script type="module" src="script.js"></script>
