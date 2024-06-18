@@ -1,22 +1,95 @@
+:root {
+    --gray: #39393A;
+    --orange: #E73B37;
+    --black: #080808;
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+html {
+    height: 100%;
+}
+
+body {
+    height: inherit;
+    display: flex;
+    flex-direction: column;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: 400;
+}
+
+body>header {
+    padding: 12px;
+    border-bottom: thin solid var(--gray);
+}
+
+main {
+    flex-basis: 100%;
+    margin: 12px auto;
+    width: auto;
+    display: flex;
+}
+
+aside {
+    width: 200px;
+}
+
+aside section {
+    border: thin solid var(--gray);
+    margin-bottom: 12px;
+
+}
+
+aside h2 {
+    font-size: 3rem;
+    text-align: center;
+}
+
+aside section h3 {
+    text-align: center;
+}
+
+aside header {
+    margin-bottom: 6px;
+    text-align: center;
+}
+
+body>footer {
+    padding: 12px;
+    border-top: thin solid var(--gray);
+}
+
+
 .gameBoard {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    border: 1px solid black;
-    padding: 4px;
-    width: calc(70px * 3);
-    height: calc(70px * 3);
+    margin: 0 12px;
+    width: 420px;
+    height: 420px;
     position: relative;
+    background-color: var(--black);
+    padding: 2px;
 }
 
 
 
 .box {
-    border: thin solid black;
     display: grid;
     place-content: center;
-    font-size: 3rem;
-    width: 68px;
-    height: 68px;
+    font-size: 6rem;
+    font-weight: bolder;
+    width: calc(400px / 3);
+    height: calc(400px / 3);
+    background-color: white;
+}
+
+.box.orange {
+    color: white;
+    background-color: var(--orange);
 }
 
 .overlay {
@@ -25,11 +98,11 @@
     place-content: center;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.596);
+    background-color: rgba(252, 252, 252, 0.938);
+    backdrop-filter: blur(3px);
     transition: visibility 0s, opacity 0.5s ease-in-out;
-    color: white;
     gap: 12px;
-    backdrop-filter: blur(12px);
+    text-align: center;
 }
 
 .overlay.hidden {
@@ -43,17 +116,12 @@
 }
 
 button {
-    padding: 4px 0;
-}
-
-
-
-
-footer {
-    padding: 12px 0;
-    height: 200px;
-}
-
-footer>span {
-    display: block;
+    padding: 6px 0;
+    border: thin solid var(--black);
+    color: var(--black);
+    outline: 0;
+    font: inherit;
+    font-weight: bolder;
+    background-color: white;
+    cursor: pointer;
 }

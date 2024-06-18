@@ -4,32 +4,63 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="style.css" />
-    <title>Document</title>
+    <title>Tic Tac Toe Game</title>
   </head>
   <body id="body">
-    <h2>Tic Tac Toe</h2>
-    <p>Turn: <span id="turn-text">Human</span></p>
-    <main class="gameBoard" id="game-board">
-      <span class="box" id="1"></span>
-      <span class="box" id="2"></span>
-      <span class="box" id="3"></span>
-      <span class="box" id="4"></span>
-      <span class="box" id="5"></span>
-      <span class="box" id="6"></span>
-      <span class="box" id="7"></span>
-      <span class="box" id="8"></span>
-      <span class="box" id="9"></span>
-      <section class="overlay hidden" id="overlay">
-        <h3 id="overlay-msg">Human win!</h3>
-        <button id="replay-btn">Replay</button>
+    <header id="header">
+      <h2>Tic Tac Toe</h2>
+    </header>
+    <main>
+      <aside>
+        <header>
+          <h4>Turn To Play:</h4>
+          <h3 id="turn-text">Human</h3>
+        </header>
+
+        <section>
+          <h3>Computer</h3>
+          <h2 id="computer-score">0</h2>
+          <h3>Win</h3>
+        </section>
+
+        <section>
+          <h3>Human</h3>
+          <h2 id="human-score">0</h2>
+          <h3>Win</h3>
+        </section>
+
+        <section>
+          <h2 id="draw-score">0</h2>
+          <h3>Draw</h3>
+        </section>
+      </aside>
+      <section class="gameBoard">
+        <span class="box" id="1"></span>
+        <span class="box" id="2"></span>
+        <span class="box" id="3"></span>
+        <span class="box" id="4"></span>
+        <span class="box" id="5"></span>
+        <span class="box" id="6"></span>
+        <span class="box" id="7"></span>
+        <span class="box" id="8"></span>
+        <span class="box" id="9"></span>
+        <div class="overlay visible" id="overlay">
+          <h2 id="overlay-msg">Human win!</h2>
+          <button id="replay-btn">Replay</button>
+        </div>
       </section>
+      <!-- <section>
+      <div class="gameFooter">
+        <span id="human-score"> Human: 0 </span>
+        <span id="computer-score"> Computer: 0 </span>
+        <span id="draw-score"> Draw: 0 </span>
+      </div> -->
     </main>
     <footer>
-      <span id="human-score"> Human: 0 </span>
-      <span id="computer-score"> Computer: 0 </span>
-      <span id="draw-score"> Draw: 0 </span>
+      &copy;
+      <a href="http://www.github.com/timtjoe" target="_blank">Timothy T. Joe</a>
     </footer>
-    <audio id="audio"></audio>
     <script type="module" src="script.js"></script>
   </body>
+  <audio id="audio"></audio>
 </html>

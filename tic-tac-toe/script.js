@@ -60,6 +60,7 @@ function isComputer() {
 
 function playHuman(node) {
   node.target.innerText = "X";
+  node.target.classList.add("orange")
   humanChoices.push(node.target.id);
   checkGameStatus(humanChoices);
   humanMoves++;
@@ -155,13 +156,13 @@ function displayResult() {
   const humanScores = db.getItem("human");
   const drawScores = db.getItem("draw");
   const computerScores = db.getItem("computer");
-  document.getElementById("human-score").innerHTML = `Human: ${
+  document.getElementById("human-score").innerHTML = `${
     humanScores || 0
   }`;
-  document.getElementById("computer-score").innerHTML = `Computer: ${
+  document.getElementById("computer-score").innerHTML = `${
     computerScores || 0
   }`;
-  document.getElementById("draw-score").innerHTML = `Draw: ${drawScores || 0}`;
+  document.getElementById("draw-score").innerHTML = `${drawScores || 0}`;
 }
 
 function endGame(message) {
@@ -184,7 +185,10 @@ function replayGame() {
   overlay.classList.remove("visible");
   overlay.classList.add("hidden");
 
-  boxes.forEach((box) => (box.innerText = ""));
+  boxes.forEach((box) => {
+    box.innerText = ""
+    box.classList.remove("orange")
+  });
 }
 
 replayBtn.addEventListener("click", () => {
@@ -198,7 +202,7 @@ function playSound(player) {
   } else if (player == "Human") {
     audioTag.src = audioSrc[1];
     audioTag.play();
-  } else if (player === "End") {
+  } else if (player == "End") {
     audioTag.src = audioSrc[2];
     audioTag.play();
   }
