@@ -72,18 +72,30 @@ function processText(text, key) {
   const operation = getState();
   let processedText = "";
 
-  const processChar = (charCode) => {
+const processChar = (charCode) => {
+  if (charCode >= 48 && charCode <= 57) {
+    return String.fromCharCode(charCode);
+  } else if (charCode === 32) {
+    return String.fromCharCode(charCode); 
+  } else if (charCode >= 65 && charCode <= 90) {
     let newCharCode =
       operation === "encrypt" ? charCode - keyInt : charCode + keyInt;
-    if (charCode >= 65 && charCode <= 90) {
-      if (newCharCode < 65) newCharCode += 26;
-      if (newCharCode > 90) newCharCode -= 26;
-    } else if (charCode >= 97 && charCode <= 122) {
-      if (newCharCode < 97) newCharCode += 26;
-      if (newCharCode > 122) newCharCode -= 26;
-    }
+    if (newCharCode < 65) newCharCode += 26;
+    if (newCharCode > 90) newCharCode -= 26;
     return String.fromCharCode(newCharCode);
-  };
+  } else if (charCode >= 97 && charCode <= 122) {
+    // a-z
+    let newCharCode =
+      operation === "encrypt" ? charCode - keyInt : charCode + keyInt;
+    if (newCharCode < 97) newCharCode += 26;
+    if (newCharCode > 122) newCharCode -= 26;
+    return String.fromCharCode(newCharCode);
+  } else {
+    return String.fromCharCode(
+      operation === "encrypt" ? charCode - keyInt : charCode + keyInt
+    );
+  }
+};
 
   for (let i = 0; i < text.length; i++) {
     processedText += processChar(text.charCodeAt(i));
