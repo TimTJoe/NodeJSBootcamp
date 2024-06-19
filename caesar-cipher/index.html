@@ -7,22 +7,59 @@
     <title>Ceasar-Cipher</title>
   </head>
   <body>
+    <!-- Main Header -->
     <header class="mainHeader">
-      <h3 class="siteName">Ceasear Cipher</h3>
+      <h1>Ceasar Cipher</h1>
+      <!-- Navigation for Encrypt and Decrypt Buttons -->
       <nav class="headerNav">
-        <button class="headerNavItem active" id="renderEncryptionFields">
-          Encrypt
-        </button>
-        <button class="headerNavItem" id="renderDecryptionFields">
-          Decrypt
-        </button>
+        <button class="active" id="encryptBtn">Encrypt</button>
+        <button id="decryptBtn">Decrypt</button>
       </nav>
-      <h3 class="siteCopyright">&copy; Tim. T. Joe</h3>
     </header>
+
+    <!-- Main Content Area -->
     <main id="mainContent">
-      <h4>Encrypt a text.</h4>
+      <section>
+        <!-- Form Section for Text Input and Key Input -->
+        <form>
+          <!-- Input for Text to be Encrypted or Decrypted -->
+          <label for="text">Text</label>
+          <input
+            type="text"
+            name="text"
+            id="text"
+            placeholder="Enter text"
+            autocomplete="off"
+          />
+          <!-- Input for Key Value -->
+          <label for="key">Key</label>
+          <input
+            type="number"
+            name="key"
+            id="key"
+            placeholder="Enter Key"
+            autocomplete="off"
+          />
+          <!-- Area to Display Validation Errors -->
+          <small id="errorSmall"></small>
+          <!-- Submit Button to Process Encryption or Decryption -->
+          <button type="button" id="submitBtn">Encrypt</button>
+        </form>
+        <!-- Section to Display Result -->
+        <article class="resultSection">
+          <h4>Result:</h4>
+          <h2 id="resultText"></h2>
+        </article>
+      </section>
     </main>
-    <footer>&copy; Timothy T. Joe</footer>
+
+    <!-- Footer Section with Author Information -->
+    <footer>
+      &copy;
+      <a href="http://github.com/timtjoe" target="_blank">Timothy T. Joe</a>
+    </footer>
+
+    <!-- JavaScript File -->
     <script type="module" src="script.js"></script>
   </body>
 </html>

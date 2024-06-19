@@ -1,131 +1,144 @@
-let mainContentDiv = getElementById("mainContent");
-let renderDecryptionFieldsBtn = getElementById("renderDecryptionFields");
-let renderEncryptionFieldsBtn = getElementById("renderEncryptionFields");
-
-let encryptionForm = `
-        <fieldset>
-        <input
-          type="text"
-          name="decryptionText"
-          id="decryptionText"
-          placeholder="Enter encrypted text"
-        />
-        <input
-          type="number"
-          name="decryptionKey"
-          id="decryptionKey"
-          placeholder="Enter encryption key"
-        />
-        <button id="decryptionBtn">Decrypt</button>
-
-        <h3>Result: <span id="decryptionResult"></span></h3>
-        <small id="decryptionError"></small>
-      </fieldset>
-  `;
-
-let decryptionForm = `
-        <fieldset>
-        <input
-          type="text"
-          name="encryptionText"
-          id="encryptionText"
-          placeholder="Enter Text"
-        />
-        <input
-          type="number"
-          name="encryptionKey"
-          id="encryptionKey"
-          placeholder="Enter encryption key"
-        />
-        <button id="encryptionBtn">Encrypt</button>
-        <h3>Result: <span id="encryptionResult">a span text</span></h3>
-        <small id="encryptionError"></small>
-      </fieldset>
-  `;
-
-window.onload = () => {
-  mainContentDiv.innerHTML = encryptionForm;
-  renderEncryptionFieldsBtn.classList.add("active");
-  renderDecryptionFieldsBtn.classList.remove("active");
-};
-
-function encrypt(text, key) {
-  let isKeyValid = validateKey(key);
-  let encryptedText = "";
-  if (!isKeyValid.status) {
-    getElementById("encryptionError").innerHTML = isKeyValid.message;
-  } else {
-    for (let i = 0; i < text.length; i++) {
-      if (text.charAt(i) === NaN) {
-        console.log(typeof text.charAt(i));
-      } else {
-        console.log(typeof text.charAt(parseFloat(i)));
-        let charCode = text.charCodeAt(i);
-        charCode = parseInt(charCode) - parseInt(key);
-        encryptedText += String.fromCharCode(charCode);
-      }
-    }
-  }
-  // getElementById("encryptionResult").innerHTML = encryptedText;
-}
-function decrypt(text, key) {
-  let isKeyValid = validateKey(key);
-  let decryptedText = "";
-  if (!isKeyValid.status) {
-    getElementById("decryptionError").innerHTML = isKeyValid.message;
-  } else {
-    for (let i = 0; i < text.length; i++) {
-      let charCode = text.charCodeAt(i);
-      charCode = parseInt(charCode) + parseInt(key);
-      decryptedText += String.fromCharCode(charCode);
-    }
-  }
-  // getElementById("decryptionResult").innerHTML = decryptedText;
-}
-
-window.addEventListener("DOMContentLoaded", (e) => {});
-
+/**
+ * Gets the value of an input element by ID.
+ * @param {string} nodeId - The ID of the input element.
+ * @returns {string} The value of the input element.
+ */
 function getValue(nodeId) {
   return document.getElementById(nodeId).value;
 }
 
-function getElementById(nodeId) {
-  return document.getElementById(nodeId);
-}
-
+/**
+ * Validates if the provided key is a number between 1 and 25.
+ * @param {string} key - The key to validate.
+ * @returns {object} An object containing the status and an optional error message.
+ */
 function validateKey(key) {
-  if (key?.constructor == "string") {
-    return { status: false, message: "Key must be number" };
-  } else if (key < 1 || key > 25) {
-    return { status: false, message: "Key must be between 1 and 25" };
+  if (isNaN(key) || key < 1 || key > 25) {
+    return { status: false, message: "Key must be a number between 1 and 25" };
   } else {
     return { status: true, message: null };
   }
 }
 
-renderEncryptionFieldsBtn.addEventListener("click", (event) => {
-  event.preventDefault();
-  renderDecryptionFieldsBtn.classList.remove("active");
-  renderEncryptionFieldsBtn.classList.add("active");
-  mainContentDiv.innerHTML = encryptionForm;
+/**
+ * Sets the history state with a specified value.
+ * @param {string} value - The value to set in history state.
+ */
+function setState(value) {
+  window.history.pushState({ type: value }, null);
+}
 
-  getElementById("encryptionBtn").addEventListener("click", () => {
-    let encryptionText = getValue("encryptionText");
-    let encryptionKey = getValue("encryptionKey");
-    encrypt(encryptionText, encryptionKey);
-  });
+/**
+ * Retrieves the current state from the history object.
+ * @returns {string|null} The current state type or null if none set.
+ */
+function getState() {
+  return window.history.state?.type || null;
+}
+
+/**
+ * Moves a specified class from one element to another.
+ * @param {string} className - The class to move.
+ * @param {string} from - The ID of the element to remove the class from.
+ * @param {string} to - The ID of the element to add the class to.
+ */
+function moveClass(className, from, to) {
+  document.getElementById(from).classList.remove(className);
+  document.getElementById(to).classList.add(className);
+}
+
+/**
+ * Clears input fields, result text, and error messages.
+ */
+function clearInputs() {
+  document.querySelectorAll("input").forEach((input) => (input.value = ""));
+  document.getElementById("resultText").innerHTML = "";
+  document.getElementById("errorSmall").innerHTML = "";
+}
+
+/**
+ * Processes the input text based on the selected operation (encrypt/decrypt).
+ * @param {string} text - The text to process.
+ * @param {string} key - The encryption/decryption key.
+ */
+function processText(text, key) {
+  const isKeyValid = validateKey(key);
+  if (!isKeyValid.status) {
+    document.getElementById("errorSmall").innerHTML = isKeyValid.message;
+    return;
+  }
+
+  const keyInt = parseInt(key);
+  const operation = getState();
+  let processedText = "";
+
+  const processChar = (charCode) => {
+    let newCharCode =
+      operation === "encrypt" ? charCode - keyInt : charCode + keyInt;
+    if (charCode >= 65 && charCode <= 90) {
+      if (newCharCode < 65) newCharCode += 26;
+      if (newCharCode > 90) newCharCode -= 26;
+    } else if (charCode >= 97 && charCode <= 122) {
+      if (newCharCode < 97) newCharCode += 26;
+      if (newCharCode > 122) newCharCode -= 26;
+    }
+    return String.fromCharCode(newCharCode);
+  };
+
+  for (let i = 0; i < text.length; i++) {
+    processedText += processChar(text.charCodeAt(i));
+  }
+
+  displayResult(processedText);
+}
+
+/**
+ * Displays the result text with typewriter effect.
+ * @param {string} text - The text to display.
+ */
+function displayResult(text) {
+  const element = document.getElementById("resultText");
+  element.innerHTML = "";
+  let i = 0;
+
+  function type() {
+    if (i < text.length) {
+      element.innerHTML += text.charAt(i);
+      i++;
+      setTimeout(type, 50);
+    }
+  }
+
+  type();
+}
+
+// Event listeners
+document.getElementById("submitBtn").addEventListener("click", () => {
+  const key = getValue("key");
+  const text = getValue("text");
+  processText(text, key);
 });
 
-getElementById("renderDecryptionFields").addEventListener("click", (event) => {
-  event.preventDefault();
-  renderDecryptionFieldsBtn.classList.add("active");
-  renderEncryptionFieldsBtn.classList.remove("active");
-  mainContentDiv.innerHTML = decryptionForm;
-
-  getElementById("decryptionBtn").addEventListener("click", () => {
-    alert("dectypt")
-    let decryptionText = getValue("decryptionText");
-    let decryptionKey = getValue("decryptionKey");
-    decrypt(decryptionText, decryptionKey);
-  });
+document.getElementById("encryptBtn").addEventListener("click", () => {
+  setState("encrypt");
+  moveClass("active", "decryptBtn", "encryptBtn");
+  clearInputs();
+  document.getElementById("submitBtn").innerHTML = "Encrypt";
 });
+
+document.getElementById("decryptBtn").addEventListener("click", () => {
+  setState("decrypt");
+  moveClass("active", "encryptBtn", "decryptBtn");
+  clearInputs();
+  document.getElementById("submitBtn").innerHTML = "Decrypt";
+});
+
+window.onload = () => {
+  setState("encrypt");
+  document.getElementById("submitBtn").innerHTML = getState();
+  if (getState() === "encrypt") {
+    moveClass("active", "decryptBtn", "encryptBtn");
+  } else if (getState() === "decrypt") {
+    moveClass("active", "encryptBtn", "decryptBtn");
+  }
+};
