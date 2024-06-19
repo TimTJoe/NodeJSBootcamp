@@ -86,6 +86,10 @@ input {
     font-size: 1.50rem;
 }
 
+input:focus {
+    outline-color: var(--green);
+}
+
 main {
     width: 360px;
 }
@@ -120,6 +124,9 @@ small {
 .resultSection h2 {
     color: var(--green);
     letter-spacing: -1px;
+    max-width: 100%;
+    word-wrap: break-word;
+    text-wrap: wrap ;
 }
 
 footer {
