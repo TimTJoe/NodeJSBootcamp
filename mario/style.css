@@ -1,0 +1,15 @@
+#block {
+    display: flex;
+    gap: 12px;
+}
+
+#leftSide {
+    text-align: right;
+}
+
+small {
+    color: red;
+    display: block;
+    font-family: 'Courier New', Courier, monospace;
+    margin: 6px 0;
+}
