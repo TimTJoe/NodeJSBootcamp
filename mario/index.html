@@ -3,23 +3,43 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="style.css" />
     <title>Mario</title>
   </head>
   <body>
-    <header>Mario Challenge</header>
+    <!-- Header section with the title -->
+    <header>
+      <h1>Mario</h1>
+    </header>
+    <!-- Main content area -->
     <main id="main">
-      <section>
-        <input type="number" id="numberInput" />
-        <button id="buildBtn">Build</button>
-        <small id="errorMsg"></small>
+      <!-- Form section for input and button -->
+      <section >
+        <form id="formFields">
+          <input type="number" id="numberInput" placeholder="Enter Number..." />
+          <button id="buildBtn" type="button">Build</button>
+        </form>
       </section>
+      <!-- Block section with left and right sides -->
       <section id="block">
-          <div id="leftSide"></div>
-          <div id="rightSide"></div>
+        <div id="leftSide"></div>
+        <div id="rightSide"></div>
       </section>
+      <!-- Error message section -->
+      <aside>
+        <small id="errorMsg"></small>
+      </aside>
     </main>
-    <footer>Footer</footer>
+    <!-- Footer section with copyright information -->
+    <footer>
+      &copy; <a href="http://github.com/timtjoe" target="_blank">Timothy T. Joe</a>
+    </footer>
     <script src="script.js"></script>
   </body>
 </html>
