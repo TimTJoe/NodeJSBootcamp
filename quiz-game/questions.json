@@ -1,0 +1,308 @@
+{
+  "html": {
+    "q1": {
+      "question": "What does HTML stand for?",
+      "choices": {
+        "a": "Hyper Text Markup Language",
+        "b": "Home Tool Markup Language",
+        "c": "Hyperlinks and Text Markup Language",
+        "d": "Hyper Tool Markup Language"
+      },
+      "correctAnswer": "a"
+    },
+    "q2": {
+      "question": "Which HTML tag is used to define an internal style sheet?",
+      "choices": {
+        "a": "<script>",
+        "b": "<style>",
+        "c": "<css>",
+        "d": "<link>"
+      },
+      "correctAnswer": "b"
+    },
+    "q3": {
+      "question": "Which HTML attribute is used to define inline styles?",
+      "choices": {
+        "a": "style",
+        "b": "class",
+        "c": "font",
+        "d": "styles"
+      },
+      "correctAnswer": "a"
+    },
+    "q4": {
+      "question": "Which is the correct HTML element for the largest heading?",
+      "choices": {
+        "a": "<heading>",
+        "b": "<h1>",
+        "c": "<head>",
+        "d": "<h6>"
+      },
+      "correctAnswer": "b"
+    },
+    "q5": {
+      "question": "What is the correct HTML element for inserting a line break?",
+      "choices": {
+        "a": "<br>",
+        "b": "<break>",
+        "c": "<lb>",
+        "d": "<newline>"
+      },
+      "correctAnswer": "a"
+    },
+    "q6": {
+      "question": "What is the correct HTML for adding a background color?",
+      "choices": {
+        "a": "<body bg='yellow'>",
+        "b": "<body style='background-color:yellow;'>",
+        "c": "<background>yellow</background>",
+        "d": "<bg color='yellow'>"
+      },
+      "correctAnswer": "b"
+    },
+    "q7": {
+      "question": "Choose the correct HTML element to define important text.",
+      "choices": {
+        "a": "<b>",
+        "b": "<strong>",
+        "c": "<i>",
+        "d": "<important>"
+      },
+      "correctAnswer": "b"
+    },
+    "q8": {
+      "question": "Choose the correct HTML element to define emphasized text.",
+      "choices": {
+        "a": "<italic>",
+        "b": "<em>",
+        "c": "<i>",
+        "d": "<emphasize>"
+      },
+      "correctAnswer": "b"
+    },
+    "q9": {
+      "question": "What is the correct HTML for creating a hyperlink?",
+      "choices": {
+        "a": "<a>http://www.example.com</a>",
+        "b": "<a name='http://www.example.com'>Example.com</a>",
+        "c": "<a href='http://www.example.com'>Example.com</a>",
+        "d": "<a url='http://www.example.com'>Example.com</a>"
+      },
+      "correctAnswer": "c"
+    },
+    "q10": {
+      "question": "Which character is used to indicate an end tag?",
+      "choices": {
+        "a": "/",
+        "b": "<",
+        "c": "^",
+        "d": "*"
+      },
+      "correctAnswer": "a"
+    }
+  },
+  "css": {
+    "q1": {
+      "question": "Which property is used to change the background color?",
+      "choices": {
+        "a": "color",
+        "b": "background-color",
+        "c": "bgcolor",
+        "d": "background"
+      },
+      "correctAnswer": "b"
+    },
+    "q2": {
+      "question": "Which CSS property controls the text size?",
+      "choices": {
+        "a": "font-style",
+        "b": "text-size",
+        "c": "font-size",
+        "d": "text-style"
+      },
+      "correctAnswer": "c"
+    },
+    "q3": {
+      "question": "Which property is used to change the font of an element?",
+      "choices": {
+        "a": "font-family",
+        "b": "font-style",
+        "c": "font-weight",
+        "d": "font-variant"
+      },
+      "correctAnswer": "a"
+    },
+    "q4": {
+      "question": "How do you make the text bold?",
+      "choices": {
+        "a": "font-weight:bold;",
+        "b": "font-style:bold;",
+        "c": "text-bold:yes;",
+        "d": "font:bold;"
+      },
+      "correctAnswer": "a"
+    },
+    "q5": {
+      "question": "Which property is used to change the text color?",
+      "choices": {
+        "a": "fgcolor",
+        "b": "text-color",
+        "c": "color",
+        "d": "font-color"
+      },
+      "correctAnswer": "c"
+    },
+    "q6": {
+      "question": "How do you display hyperlinks without an underline?",
+      "choices": {
+        "a": "text-decoration:none;",
+        "b": "text-decoration:no-underline;",
+        "c": "underline:none;",
+        "d": "text-underline:none;"
+      },
+      "correctAnswer": "a"
+    },
+    "q7": {
+      "question": "Which property is used to change the left margin of an element?",
+      "choices": {
+        "a": "indent",
+        "b": "padding-left",
+        "c": "margin-left",
+        "d": "margin"
+      },
+      "correctAnswer": "c"
+    },
+    "q8": {
+      "question": "How do you select an element with id 'demo'?",
+      "choices": {
+        "a": ".demo",
+        "b": "#demo",
+        "c": "demo",
+        "d": "*demo"
+      },
+      "correctAnswer": "b"
+    },
+    "q9": {
+      "question": "How do you select elements with class name 'test'?",
+      "choices": {
+        "a": ".test",
+        "b": "#test",
+        "c": "test",
+        "d": "*test"
+      },
+      "correctAnswer": "a"
+    },
+    "q10": {
+      "question": "How do you make each word in a text start with a capital letter?",
+      "choices": {
+        "a": "text-transform:capitalize;",
+        "b": "text-transform:uppercase;",
+        "c": "text-transform:lowercase;",
+        "d": "text-transform:initial;"
+      },
+      "correctAnswer": "a"
+    }
+  },
+  "js": {
+    "q1": {
+      "question": "Which company developed JavaScript?",
+      "choices": {
+        "a": "Mozilla",
+        "b": "Netscape",
+        "c": "Sun Microsystems",
+        "d": "Oracle"
+      },
+      "correctAnswer": "b"
+    },
+    "q2": {
+      "question": "How do you write 'Hello World' in an alert box?",
+      "choices": {
+        "a": "alertBox('Hello World');",
+        "b": "msg('Hello World');",
+        "c": "alert('Hello World');",
+        "d": "msgBox('Hello World');"
+      },
+      "correctAnswer": "c"
+    },
+    "q3": {
+      "question": "How do you create a function in JavaScript?",
+      "choices": {
+        "a": "function:myFunction()",
+        "b": "function = myFunction()",
+        "c": "function myFunction()",
+        "d": "myFunction:function()"
+      },
+      "correctAnswer": "c"
+    },
+    "q4": {
+      "question": "How do you call a function named 'myFunction'?",
+      "choices": {
+        "a": "call myFunction()",
+        "b": "call function myFunction()",
+        "c": "myFunction()",
+        "d": "Call.myFunction()"
+      },
+      "correctAnswer": "c"
+    },
+    "q5": {
+      "question": "How do you write an IF statement in JavaScript?",
+      "choices": {
+        "a": "if i == 5 then",
+        "b": "if (i == 5)",
+        "c": "if i = 5",
+        "d": "if (i = 5) then"
+      },
+      "correctAnswer": "b"
+    },
+    "q6": {
+      "question": "How do you write a JavaScript array?",
+      "choices": {
+        "a": "var colors = 1 = ('red'), 2 = ('green'), 3 = ('blue')",
+        "b": "var colors = (1:'red', 2:'green', 3:'blue')",
+        "c": "var colors = ['red', 'green', 'blue']",
+        "d": "var colors = 'red', 'green', 'blue'"
+      },
+      "correctAnswer": "c"
+    },
+    "q7": {
+      "question": "How do you round the number 7.25 to the nearest integer?",
+      "choices": {
+        "a": "Math.round(7.25)",
+        "b": "Math.rnd(7.25)",
+        "c": "round(7.25)",
+        "d": "rnd(7.25)"
+      },
+      "correctAnswer": "a"
+    },
+    "q8": {
+      "question": "How do you find the number with the highest value of x and y?",
+      "choices": {
+        "a": "ceil(x, y)",
+        "b": "Math.ceil(x, y)",
+        "c": "Math.max(x, y)",
+        "d": "top(x, y)"
+      },
+      "correctAnswer": "c"
+    },
+    "q9": {
+      "question": "What is the correct JavaScript syntax for opening a new window called 'w2'?",
+      "choices": {
+        "a": "w2 = window.new('http://www.example.com');",
+        "b": "w2 = window.open('http://www.example.com');",
+        "c": "w2 = window.create('http://www.example.com');",
+        "d": "w2 = window.launch('http://www.example.com');"
+      },
+      "correctAnswer": "b"
+    },
+    "q10": {
+      "question": "How do you declare a JavaScript variable?",
+      "choices": {
+        "a": "v carName;",
+        "b": "variable carName;",
+        "c": "var carName;",
+        "d": "var = carName;"
+      },
+      "correctAnswer": "c"
+    }
+  }
+}

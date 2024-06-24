@@ -1,0 +1,32 @@
+@import url("../root.css");
+@import url("../colors.css");
+
+
+body {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--dark-gray);
+    color: var(--white);
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: larger;
+
+}
+
+body > header, body > footer {
+    padding: 12px;
+}
+
+main {
+    flex-basis: 100%;
+    display: flex;
+}
+
+main aside {
+    width: 275px;
+    padding: 12px;
+}
+
+main #contents {
+    background-color: var(--dark-blue-gray);
+    flex-basis: 100%;
+}
