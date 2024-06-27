@@ -10,14 +10,17 @@
     <header>Header</header>
     <main>
       <section>
-        <span id="wpm">WPM: </span>
-        <span id="cpm">CPM: </span>
+        <h3>Type paragraph in textbox</h3>
+        <p id="paragraph"></p>
       </section>
-      <p id="paragraph"></p>
       <textarea id="textarea" cols="50" rows="10"></textarea>
+      <button id="reset">Try Again</button>
       <section>
-        <span id="errors">Errors: </span>
-        <span id="accuracy">Accuracy: </span>
+        <p>Timer: <strong id="timer"></strong></p>
+        <p>Words Per Min: <strong id="wpm"></strong></p>
+        <p>Character Per Min: <strong id="cpm"></strong></p>
+        <p>Errors: <strong id="errors"></strong></p>
+        <p>Accuracy: <strong id="accuracy"></strong></p>
       </section>
     </main>
     <footer>
@@ -27,6 +30,6 @@
         * WPM means Words Per Minute
       </section>
     </footer>
-    <script src="script.js"></script>
+    <script type="module" src="script.js"></script>
   </body>
 </html>
