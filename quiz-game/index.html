@@ -7,24 +7,63 @@
     <title>Quiz Game</title>
   </head>
   <body>
-    <header id="header">
-      <h1>Quiz Game</h1>
-    </header>
+    <nav>
+      <header>
+        <h1>Quiz Game</h1>
+      </header>
+      <section>
+        <h3>Choose Questions Category</h3>
+        <button class="categoryBtn" value="all">All</button>
+        <button class="categoryBtn" value="html">HTML</button>
+        <button class="categoryBtn" value="javascript">JavaScript</button>
+        <button class="categoryBtn" value="css">CSS</button>
+      </section>
+      <footer id="footer">
+        &copy;
+        <a href="http://github.com/timtjoe" target="_blank">Timothy T. Joe</a>
+      </footer>
+    </nav>
     <main id="main">
-      <!-- <aside id="sidebar">aside</aside> -->
-      <div id="contents">
+      <section>
         <header>
-          <button id="jsBtn">JavaScript</button>
-          <button id="htmlBtn">HTML</button>
-          <button id="cssBtn">CSS</button>
+          <h2 id="question">What is the meaning of HTML</h2>
         </header>
-        <section id="questions">questions</section>
-      </div>
+        <fieldset>
+          <label for="q1">
+            <input id="q1" type="radio" value="a" />
+            <span>The Answer to this Question</span>
+          </label>
+          <label for="q1" class="error">
+            <input id="q1" type="radio" value="a" />
+            <span>The Answer to this Question</span>
+          </label>
+          <label for="q1">
+            <input id="q1" type="radio" value="a" />
+            <span>The Answer to this Question</span>
+          </label>
+          <label for="q2" class="success">
+            <input id="q2" type="radio" value="b" />
+            <span>The Answer to this Question</span>
+          </label>
+        </fieldset>
+      </section>
+
+      <footer>
+        <span>1 of 5 Questions</span>
+        <button>Next Question</button>
+      </footer>
     </main>
-    <footer id="footer">
-      &copy;
-      <a href="http://github.com/timtjoe" target="_blank">Timothy T. Joe</a>
-    </footer>
+    <aside>
+      <header>
+        <span>Score: 50% of 100%</span>
+        <span>
+          Live review: <input type="checkbox" checked/>
+        </span>
+      </header>
+      <section>
+        data
+      </section>
+    </aside>
     <script type="module" src="script.js"></script>
   </body>
 </html>

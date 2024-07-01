@@ -1,12 +1,15 @@
 :root {
     --gray: #232323;
-    --lite-gray: #323232;
     --xlite-gray: #474747;
-    --dark-gray: #1C1C1C;
-    --blue-gray: #525D8D;
+    --lite-blue-gray: #525D8D;
     --white: #F9F9F9;
-    --turquoise: #4CC2FF;
     --dark-turquoise: #4cc3ffd0;
     --orange: #FF8232;
     --dark-blue-gray: #2E3240;
+    --dark-gray: #1E2024;
+    --indigo: #1A2031;
+    --light-gray: #CBCCD0;
+    --turquoise: #4CC2FF;
+    --blue-gray: #272C3F;
+    --bg-gradient: linear-gradient(to right, var(--dark-gray), var(--indigo), var(--blue-gray))
 }

@@ -1,39 +1,12 @@
+import { getState, setState } from "../modules.js";
+
 const questionsURL = "./questions.json";
-const htmlBtn = document.getElementById("htmlBtn");
-const jsBtn = document.getElementById("jsBtn");
-const cssBtn = document.getElementById("cssBtn");
-const questionIndex = [
-  "q1",
-  "q2",
-  "q3",
-  "q4",
-  "q5",
-  "q6",
-  "q7",
-  "q8",
-  "q8",
-  "q9",
-  "q10",
-];
 
-htmlBtn.addEventListener("click", async (e) => {
-  let data = await readJSONFile(questionsURL);
-  data = data["html"][questionIndex[1]];
-  console.log(data);
-});
-
-cssBtn.addEventListener("click", async (e) => {
-  let data = await readJSONFile(questionsURL);
-  data = data["css"];
-  console.log(data);
-});
-
-jsBtn.addEventListener("click", async (e) => {
-  let data = await readJSONFile(questionsURL);
-  data = data["js"];
-
-  console.log(data);
-});
+window.onload = () => {
+  document.querySelectorAll(".categoryBtn").forEach((button) => {
+    button.value == getState() ? button.classList.add("active") : null;
+  });
+};
 
 async function readJSONFile(url) {
   const response = await fetch(url);
@@ -41,26 +14,21 @@ async function readJSONFile(url) {
   return data;
 }
 
-function displayQuestion(question) {
+function getRandomQuestions(type, num) {
+  setState(type);
+}
+
+function displayQuestions(question) {
   console.log(question);
 }
 
-function getData(data, type, index) {
-  return data[type][index];
-}
-
-function getRandomQuestion(data) {
-  const questionIndex = [
-    "q1",
-    "q2",
-    "q3",
-    "q4",
-    "q5",
-    "q6",
-    "q7",
-    "q8",
-    "q8",
-    "q9",
-    "q10",
-  ];
-}
+document.querySelectorAll(".categoryBtn").forEach((button) => {
+  button.addEventListener("click", (e) => {
+    setState(button.value);
+    let state = getState() || null;
+    document
+      .querySelectorAll(".categoryBtn")
+      .forEach((btn) => btn.classList.remove("active"));
+    button.value == state ? button.classList.add("active") : null;
+  });
+});

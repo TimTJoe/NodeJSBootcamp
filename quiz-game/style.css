@@ -1,32 +1,117 @@
-@import url("../root.css");
 @import url("../colors.css");
-
+@import url("../root.css");
 
 body {
-    display: flex;
-    flex-direction: column;
-    background-color: var(--dark-gray);
-    color: var(--white);
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    font-size: larger;
-
+    background: var(--bg-gradient);
+    display: grid;
+    grid-template-columns: 278px 1fr 1fr;
+    color: var(--light-gray);
 }
 
-body > header, body > footer {
-    padding: 12px;
+nav {
+    background-color: var(--indigo);
+    display: flex;
+    flex-direction: column;
+    border-right: thin solid var(--lite-blue-gray);
+}
+
+nav header {
+    padding: var(--spacing-sm);
+    border-bottom: thin solid var(--lite-blue-gray);
+}
+
+nav section {
+    padding: var(--spacing-sm);
+    flex-basis: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+}
+
+nav section button, button {
+    border-radius: 8px;
+    background-color: transparent;
+    padding: var(--spacing-sm);
+    font-size: medium;
+    outline: 0;
+    border: 0;
+    color: var(--turquoise);
+    text-align: left;
+    cursor: pointer;
+}
+
+nav section button:hover {
+    outline: thin solid var(--turquoise);
+}
+
+section button.active {
+    outline: thin solid var(--turquoise);
+}
+
+nav footer {
+    padding: var(--spacing-sm);
 }
 
 main {
-    flex-basis: 100%;
+    background-color: var(--);
+    max-width: 578px;
+    border-right: thin solid var(--lite-blue-gray);
     display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
-main aside {
-    width: 275px;
-    padding: 12px;
+main section {
+    padding: var(--spacing-md);
 }
 
-main #contents {
-    background-color: var(--dark-blue-gray);
-    flex-basis: 100%;
+main section header {
+    font-size: x-large;
+}
+
+main section fieldset {
+    border: 0;
+    outline: 0;
+}
+
+section fieldset label {
+    display: block;
+    padding: var(--spacing-md);
+    cursor: pointer;
+    margin: var(--spacing-sm)0;
+    border-radius: 12px;
+    border: 2px solid var(--lite-blue-gray);
+    font-size: large;
+    color: var(--lite-gray);
+}
+
+fieldset label.error {
+    color: #9c0000;
+    border-color: red;
+}
+
+fieldset label.success {
+    color: #005500;
+    border-color: green;
+}
+
+main footer {
+    padding: var(--spacing-md);
+    display: flex;
+    justify-content: space-between;
+    font-size: x-large;
+    align-items: center;
+}
+
+main footer button {
+    text-align: center;
+    outline: thin solid var(--turquoise);
+}
+
+aside header {
+    padding: var(--spacing-md);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: thin solid var(--lite-blue-gray);
 }
