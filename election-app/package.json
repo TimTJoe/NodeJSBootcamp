@@ -1,0 +1,23 @@
+{
+  "name": "election-app",
+  "version": "1.0.0",
+  "description": "Election App",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "election",
+    "app",
+    "Timothy"
+  ],
+  "author": "Timothy T. Joe",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.20.2",
+    "ejs": "^3.1.10",
+    "express": "^4.19.2",
+    "nodemon": "^3.1.4",
+    "path": "^0.12.7"
+  }
+}
