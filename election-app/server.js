@@ -15,19 +15,16 @@ const db = new sqlite3.Database('./test.db')
 
 db.serialize(() => {
 
-//   db.run('CREATE TABLE lorem (info TEXT)')
-//   const stmt = db.prepare('INSERT INTO lorem VALUES (?)')
+  const stmt = db.prepare('INSERT INTO auth VALUES ("", "joe", "12345678")')
 
-//   for (let i = 0; i < 10; i++) {
-//     stmt.run(`Ipsum ${i}`)
-//   }
-
-//   stmt.finalize()
+  stmt.finalize()
 
   db.each('SELECT * from auth', (err, row) => {
     console.log(row)
   })
+
 })
+
 
 db.close()
 
@@ -47,19 +44,18 @@ app.post("/login", (req,res)=>{
 
     const {username, password} = req.body
    
-    const user = users.find(
-        (user) => {user.username === username && user.password === password});
+    const user = users.find((user) => user.username == username && user.password == password);
 
     if(user){
         res.redirect("/dashboard")
     } else {
-        res.send("Invalid username or password")
+        res.json({user, login: req.body})
     }
 
 });
 
 app.get("/signup", (req,res)=>{
-    res.render("signUp.ejs")
+    res.render("signup.ejs")
 })
 
 app.post("/signup",(req,res)=>{
