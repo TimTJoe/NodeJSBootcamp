@@ -1,0 +1,6 @@
+create a table call roles with the following fields: id and role
+create a table call users with id, first_name, middle_name, last_name, DOB
+create a table call parties with id, party, logo
+create a table call positions id, position
+create a table call candidates id, first_name, middle_name, last_name, position_id, party_id, photo
+create a table call votes id, candidate_id, vote

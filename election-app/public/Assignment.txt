@@ -1,0 +1,5 @@
+in your view folder create the following files
+1) voter-registration.ejs = users table fields + username and password - store in user table
+2) party-registration.ejs = party name and party logo - store in part table
+3) login.ejs = username and password 
+4) vote.ejs = later
