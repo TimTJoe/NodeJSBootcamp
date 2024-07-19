@@ -27,9 +27,9 @@ db.serialize(() => {
 
 //   stmt.finalize()
 
-  db.each('SELECT * from auth', (err, row) => {
-    console.log(row)
-  })
+//   db.each('SELECT * from auth', (err, row) => {
+//     console.log(row)
+//   })
 
 })
 
@@ -51,15 +51,16 @@ app.get("/login", (req,res)=>{
 app.post("/login", (req,res)=>{   
 
     const {username, password} = req.body
-   
-    const user = users.find((user) => user.username == username && user.password == password);
-
-    if(user){
-        res.redirect("/dashboard")
-    } else {
-        res.json({user, login: req.body})
+    db.each('SELECT * from auth', (err, row) => {
+        const user = row.username === username && row.password === password
+            if(user) {
+               res.redirect("/dashboard")
+            } else {
+                console.log("Incorrect username or password")
+                // res.send("Incorrect username or password")
+            } 
     }
-
+    )
 });
 
 app.get("/signup", (req,res)=>{
@@ -83,6 +84,7 @@ app.get("/voter-registration", (req, res) => {
 })
  
 app.post("/voter-registration", (req, res) => {
+    try {
         const user_id = Date.now()
         const {first_name, middle_name, last_name, DOB, username, password} = req.body
         db.serialize(() => {
@@ -90,7 +92,10 @@ app.post("/voter-registration", (req, res) => {
             })
             const auth_id = Date.now()
             db.run("INSERT INTO auth VALUES(?,?,?,?)", [auth_id,username,password, user_id])
-        // db.close()
+        res.send("Voter registration successful.")
+    } catch (error) {
+        res.send({message: "error occured", error})
+    }
 })
 
 app.get("/party-registration", (req, res) => {
@@ -98,15 +103,16 @@ app.get("/party-registration", (req, res) => {
 })
 
 app.post("/party-registration", (req, res) => {
+    try {
         const {party, logo} = req.body
         const id = Date.now()
         db.serialize(() => {
             db.run("INSERT INTO parties VALUES (?,?,?)", [id,party, logo])
             })
-        db.each('SELECT * from parties', (err, row) => {
-            console.log(row)
-        })
-        db.close()
+            res.send("Party registration successful")
+    } catch (error) {
+        res.send("An error occurred", error)
+    }
 })
  
 
