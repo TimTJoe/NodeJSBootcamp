@@ -41,19 +41,17 @@ app.get("/login", (req,res)=>{
 app.post("/login", (req, res) => {
     // Extract username and password from request body
     const { username, password } = req.body;
-    req.on("data", data => {
-        console.log(data)
-    })
-    // // Query the database to find a matching username and password
-    // db.get('SELECT * from auth WHERE username=? AND password=?', [username, password], function(err, row) {
-    //     if (row) {
-    //         // Redirect to the dashboard page upon successful login
-    //         res.redirect("/dashboard"); 
-    //     } else {
-    //         // If no matching user is found, log the error
-    //         console.error(err);
-    //     }
-    // });
+    
+    // Query the database to find a matching username and password
+    db.get('SELECT * from auth WHERE username=? AND password=?', [username, password], function(err, row) {
+        if (row) {
+            // Redirect to the dashboard page upon successful login
+            res.redirect("/dashboard"); 
+        } else {
+            // If no matching user is found, log the error
+            console.error(err);
+        }
+    });
 
 });
 
