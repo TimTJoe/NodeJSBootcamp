@@ -1,14 +1,13 @@
 const express = require("express");
 const path = require ("path")
-const bodyparser =require("body-parser")
+const bodyParser =require("body-parser")
 const app = express();
 const port= 3000;
 
-app.use(bodyparser.json())
-app.use(bodyparser.urlencoded({extended:true}))
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({extended:true}))
 app.use(express.static((path.join(__dirname, "public"))))
 app.set("view engine", "ejs")
-let users = []
 
 const sqlite3 = require('sqlite3').verbose()
 const db = new sqlite3.Database('./elections.db')
@@ -26,8 +25,6 @@ db.serialize(() => {
 })
 
 
-// db.close()
-
 app.get("/dashboard", (req,res)=>{
     res.render("dashboard.ejs")
 })
@@ -40,36 +37,26 @@ app.get("/login", (req,res)=>{
     res.render("login.ejs")
 })
 
-app.post("/login", (req,res)=>{   
+// Handle POST request to /login endpoint
+app.post("/login", (req, res) => {
+    // Extract username and password from request body
+    const { username, password } = req.body;
+    req.on("data", data => {
+        console.log(data)
+    })
+    // // Query the database to find a matching username and password
+    // db.get('SELECT * from auth WHERE username=? AND password=?', [username, password], function(err, row) {
+    //     if (row) {
+    //         // Redirect to the dashboard page upon successful login
+    //         res.redirect("/dashboard"); 
+    //     } else {
+    //         // If no matching user is found, log the error
+    //         console.error(err);
+    //     }
+    // });
 
-    const {username, password} = req.body
-    db.each('SELECT * from auth', function(err, row) {
-        const user = row.username === username && row.password === password
-            if(user) {
-               res.redirect("/dashboard")
-            } else {
-                console.log("Incorrect username or password")
-                // res.send("Incorrect username or password")
-            } 
-    }
-    )
 });
 
-app.get("/signup", (req,res)=>{
-    res.render("signup.ejs")
-})
-
-app.post("/signup",(req,res)=>{
-    const userData = {
-        username: req.body.username,
-        password: req.body.password,
-        email: req.body.email,
-    }; 
-
-    users.push(userData);
-    console.log(`User SignUp:`, userData)
-    res.redirect("/login")
-})
 
 app.get("/voter-registration", (req, res) => {
     res.render("voter-registration.ejs")
@@ -77,52 +64,43 @@ app.get("/voter-registration", (req, res) => {
  
 // Handle POST request to /voter-registration endpoint
 app.post("/voter-registration", (req, res) => {
-    try {
         // Destructure required fields from request body
         const {first_name, middle_name, last_name, DOB, username, password} = req.body;
-        
         // Insert user information into 'users' table in the database
         db.run("INSERT INTO users VALUES(?,?,?,?,?)", [null, first_name, middle_name, last_name, DOB], function(err) { 
             if(err) { 
                 // If there's an error, throw it
-                throw new Error(err); 
+                console.error(err)
             } else { 
-                // Log successful registration and the last inserted ID
-                console.log(`Voter registered: `, this.lastID);
-                
-                // Insert authentication information into 'auth' table using last inserted ID
+                // Insert auth information into 'auth' table using last inserted ID
                 db.run("INSERT INTO auth VALUES(?,?,?,?)", [null, username, password, this.lastID]);
-
                 // Redirect to login page after successful registration
                 res.redirect("/login");
             }
         });
-    } catch (error) {
-        // Catch any synchronous errors and send an error response
-        res.send({message: "Error occurred", error});
-    }
 });
-
 
 app.get("/party-registration", (req, res) => {
     res.render("party-registration.ejs")
 })
 
+// Handle POST requests to "/party-registration"
 app.post("/party-registration", (req, res) => {
-    try {
-        const {party, logo} = req.body
-        const id = Date.now()
-            db.run("INSERT INTO parties VALUES (?, ?,?,?)", [null,id,party, logo], function(err) {
-                if(!err) {
-                    req.redirect("/dashboard")
-                } else {
-                    throw new Error(err); 
-                }
-            })
-    } catch (error) {
-        res.send("An error occurred", error)
-    }
-})
+        // Destructure party and logo from the request body
+        const { party, logo } = req.body;
+
+        // Insert party details into the database
+        db.run("INSERT INTO parties VALUES (?,?,?)", [null, party, logo], function(err) {
+            if (!err) {
+                // Redirect to the dashboard if insertion is successful
+                res.redirect("/dashboard");
+            } else {
+                // console log if insertion fails
+                console.error(err)
+            }
+        });
+});
+
 
 app.get("/votes", (req, res) => {
     res.render("vote.ejs")
