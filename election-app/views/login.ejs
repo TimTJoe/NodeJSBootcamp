@@ -1,27 +1,18 @@
-<%- include("./include/head") %>
-
-    <h2>USER LOGIN</h2>
-    <form action="/login"  method="post" id="loginForm">
-
-      <fieldset class="formGroup">
-        <label for="username">Username</label>
-        <input type="text" id="username" name="username" required>
-      </fieldset>
-
-      <fieldset class="formGroup">
-        <label for="password">Password</label>
-        <input type="password" id="password" name="password" required>
-      </fieldset>
-
-      <fieldset  class="checkboxGroup">
-        <input type="checkbox" id="rememberMe" name="rememberMe"> 
-        <label for="rememberMe">Remember me</label>
-      </fieldset>
-
-      <fieldset>
-        <button type="submit" class="loginBtn">Log in</button>
-        <p>Don't have and account? <a href="/signup">Sign Up</a></p> 
-      </fieldset>
-     
-    </form>
-<%- include("./include/foot") %>
+<%- include("./partials/head") %>
+<%- include("./partials/nav") %>
+    <main>
+        <form action="/login"  method="post" id="loginForm">
+            <fieldset>
+                <legend>Log In</legend>
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" required>
+                <br/>
+                <label for="password">Password:</label>
+                <input type="text" id="password" name="password" required>
+                <br/>
+                <br/>
+                <button type="submit">login</button>
+            </fieldset>
+        </form>
+    </main>
+<%- include("./partials/foot") %>

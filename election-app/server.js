@@ -15,7 +15,7 @@ const db = new sqlite3.Database('./elections.db')
 
 db.serialize(() => {
 
-    db.run('CREATE TABLE IF NOT EXISTS auth (id INT AUTO_INCREMENT PRIMARY KEY, username VARCHAR(50) NOT NUll, password VARCHAR(50) NOT NULL, user_id INT)')
+    db.run('CREATE TABLE IF NOT EXISTS auth (id INT AUTO_INCREMENT PRIMARY KEY, username VARCHAR(50) NOT NUll UNIQUE, password VARCHAR(50) NOT NULL, user_id INT)')
     db.run('CREATE TABLE IF NOT EXISTS  roles (id INT AUTO_INCREMENT PRIMARY KEY, role VARCHAR(50) NOT NUll)')
     db.run('CREATE TABLE IF NOT EXISTS users (id INT AUTO_INCREMENT PRIMARY KEY, first_name VARCHAR(50) NOT NUll, middle_name VARCHAR(50) NULL, last_name VARCHAR(50) NOT NULL, DOB DATE NOT NULL)')
     db.run('CREATE TABLE IF NOT EXISTS parties (id INT AUTO_INCREMENT PRIMARY KEY, party VARCHAR(50) NOT NUll, logo BLOB NULL)')
@@ -83,19 +83,29 @@ app.get("/voter-registration", (req, res) => {
 })
  
 app.post("/voter-registration", (req, res) => {
+        const user_id = Date.now()
         const {first_name, middle_name, last_name, DOB, username, password} = req.body
         db.serialize(() => {
-            db.run("INSERT INTO users VALUES (?,?,?,?,?)", [null,first_name, middle_name,last_name, DOB])
+            db.run("INSERT INTO users VALUES (?,?,?,?,?)", [user_id,first_name, middle_name,last_name, DOB])
             })
-            db.run("INSERT INTO auth VALUES(?,?,?,?)", [null,username,password, user_id = row.id])
-        db.close()
+            const auth_id = Date.now()
+            db.run("INSERT INTO auth VALUES(?,?,?,?)", [auth_id,username,password, user_id])
+        // db.close()
+})
+
+app.get("/party-registration", (req, res) => {
+    res.render("party-registration.ejs")
 })
 
 app.post("/party-registration", (req, res) => {
         const {party, logo} = req.body
+        const id = Date.now()
         db.serialize(() => {
-            db.run("INSERT INTO party VALUES (?,?,?)", [null,party, logo])
+            db.run("INSERT INTO parties VALUES (?,?,?)", [id,party, logo])
             })
+        db.each('SELECT * from parties', (err, row) => {
+            console.log(row)
+        })
         db.close()
 })
  
