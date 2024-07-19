@@ -114,6 +114,10 @@ app.post("/party-registration", (req, res) => {
         res.send("An error occurred", error)
     }
 })
+
+app.get("/votes", (req, res) => {
+    res.render("vote.ejs")
+})
  
 
 app.listen(port,()=>{
