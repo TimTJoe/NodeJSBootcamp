@@ -16,8 +16,7 @@ const db = new sqlite3.Database('./elections.db')
 db.serialize(() => {
 
     db.run('CREATE TABLE IF NOT EXISTS auth (id INTEGER  PRIMARY KEY AUTOINCREMENT, username VARCHAR(50) NOT NUll UNIQUE, password VARCHAR(50) NOT NULL, user_id INTEGER)')
-    db.run('CREATE TABLE IF NOT EXISTS auth (id INTEGER  PRIMARY KEY AUTOINCREMENT, username VARCHAR(50) NOT NUll, password VARCHAR(50) NOT NULL, user_id INTEGER)')
-    db.run('CREATE TABLE IF NOT EXISTS  roles (id INTEGER  PRIMARY KEY AUTOINCREMENT, role VARCHAR(50) NOT NUll)')
+    db.run('CREATE TABLE IF NOT EXISTS roles (id INTEGER  PRIMARY KEY AUTOINCREMENT, role VARCHAR(50) NOT NUll)')
     db.run('CREATE TABLE IF NOT EXISTS users (id INTEGER  PRIMARY KEY AUTOINCREMENT, first_name VARCHAR(50) NOT NUll, middle_name VARCHAR(50) NULL, last_name VARCHAR(50) NOT NULL, DOB DATE NOT NULL)')
     db.run('CREATE TABLE IF NOT EXISTS parties (id INTEGER  PRIMARY KEY AUTOINCREMENT, party VARCHAR(50) NOT NUll, logo BLOB NULL)')
     db.run('CREATE TABLE IF NOT EXISTS positions (id INTEGER  PRIMARY KEY AUTOINCREMENT, position VARCHAR(50) NOT NUll)')
@@ -80,15 +79,15 @@ app.post("/voter-registration", (req, res) => {
     try {
         const {first_name, middle_name, last_name, DOB, username, password} = req.body
 
-        // db.serialize(() => {
-
-            db.run("INSERT INTO users VALUES (?,?,?,?)", [first_name, middle_name,last_name, DOB], function() {
-
-                db.run("INSERT INTO auth VALUES(?,?,?)", [username,password, this.lastID])
-                res.redirect("/login")
-
+        db.run("INSERT INTO users VALUES(?,?,?,?,?)", [null,first_name, middle_name,last_name, DOB], function(err) {
+                if(err) {
+                    throw new Error(err)
+                } else {
+                    console.log(`Voter registered: `, this.lastID)
+                    db.run("INSERT INTO auth VALUES(?,?,?,?)", [null, username,password, this.lastID])
+                    res.redirect("/login")
+                }
             })
-            // })
 
         // res.send("Voter registration successful.")
     } catch (error) {
