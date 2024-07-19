@@ -11,13 +11,21 @@ app.set("view engine", "ejs")
 let users = []
 
 const sqlite3 = require('sqlite3').verbose()
-const db = new sqlite3.Database('./test.db')
+const db = new sqlite3.Database('./elections.db')
 
 db.serialize(() => {
 
-  const stmt = db.prepare('INSERT INTO auth VALUES ("", "joe", "12345678")')
+    db.run('CREATE TABLE IF NOT EXISTS auth (id INT AUTO_INCREMENT PRIMARY KEY, username VARCHAR(50) NOT NUll, password VARCHAR(50) NOT NULL, user_id INT)')
+    db.run('CREATE TABLE IF NOT EXISTS  roles (id INT AUTO_INCREMENT PRIMARY KEY, role VARCHAR(50) NOT NUll)')
+    db.run('CREATE TABLE IF NOT EXISTS users (id INT AUTO_INCREMENT PRIMARY KEY, first_name VARCHAR(50) NOT NUll, middle_name VARCHAR(50) NULL, last_name VARCHAR(50) NOT NULL, DOB DATE NOT NULL)')
+    db.run('CREATE TABLE IF NOT EXISTS parties (id INT AUTO_INCREMENT PRIMARY KEY, party VARCHAR(50) NOT NUll, logo BLOB NULL)')
+    db.run('CREATE TABLE IF NOT EXISTS positions (id INT AUTO_INCREMENT PRIMARY KEY, position VARCHAR(50) NOT NUll)')
+    db.run('CREATE TABLE IF NOT EXISTS candidates (id INT AUTO_INCREMENT PRIMARY KEY, first_name VARCHAR(50) NOT NUll, middle_name VARCHAR(50) NULL, last_name VARCHAR(50), position_id INT NOT NULL, party_id INT NOT NULL, photo BLOB NOT NULL)')
+    db.run('CREATE TABLE IF NOT EXISTS votes (id INT AUTO_INCREMENT PRIMARY KEY, candidate_id INT NOT NULL, vote INT NOT NULL)')
 
-  stmt.finalize()
+//   const stmt = db.prepare('INSERT INTO auth VALUES ("", "joe", "12345678")')
+
+//   stmt.finalize()
 
   db.each('SELECT * from auth', (err, row) => {
     console.log(row)
