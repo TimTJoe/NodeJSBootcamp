@@ -75,25 +75,34 @@ app.get("/voter-registration", (req, res) => {
     res.render("voter-registration.ejs")
 })
  
+// Handle POST request to /voter-registration endpoint
 app.post("/voter-registration", (req, res) => {
     try {
-        const {first_name, middle_name, last_name, DOB, username, password} = req.body
+        // Destructure required fields from request body
+        const {first_name, middle_name, last_name, DOB, username, password} = req.body;
+        
+        // Insert user information into 'users' table in the database
+        db.run("INSERT INTO users VALUES(?,?,?,?,?)", [null, first_name, middle_name, last_name, DOB], function(err) { 
+            if(err) { 
+                // If there's an error, throw it
+                throw new Error(err); 
+            } else { 
+                // Log successful registration and the last inserted ID
+                console.log(`Voter registered: `, this.lastID);
+                
+                // Insert authentication information into 'auth' table using last inserted ID
+                db.run("INSERT INTO auth VALUES(?,?,?,?)", [null, username, password, this.lastID]);
 
-        db.run("INSERT INTO users VALUES(?,?,?,?,?)", [null,first_name, middle_name,last_name, DOB], function(err) {
-                if(err) {
-                    throw new Error(err)
-                } else {
-                    console.log(`Voter registered: `, this.lastID)
-                    db.run("INSERT INTO auth VALUES(?,?,?,?)", [null, username,password, this.lastID])
-                    res.redirect("/login")
-                }
-            })
-
-        // res.send("Voter registration successful.")
+                // Redirect to login page after successful registration
+                res.redirect("/login");
+            }
+        });
     } catch (error) {
-        res.send({message: "error occured", error})
+        // Catch any synchronous errors and send an error response
+        res.send({message: "Error occurred", error});
     }
-})
+});
+
 
 app.get("/party-registration", (req, res) => {
     res.render("party-registration.ejs")
@@ -103,10 +112,13 @@ app.post("/party-registration", (req, res) => {
     try {
         const {party, logo} = req.body
         const id = Date.now()
-        // db.serialize(() => {
-            db.run("INSERT INTO parties VALUES (?,?,?)", [id,party, logo])
-            // })
-            res.send("Party registration successful")
+            db.run("INSERT INTO parties VALUES (?, ?,?,?)", [null,id,party, logo], function(err) {
+                if(!err) {
+                    req.redirect("/dashboard")
+                } else {
+                    throw new Error(err); 
+                }
+            })
     } catch (error) {
         res.send("An error occurred", error)
     }
