@@ -34,7 +34,7 @@ db.serialize(() => {
 })
 
 
-db.close()
+// db.close()
 
 app.get("/dashboard", (req,res)=>{
     res.render("dashboard.ejs")
@@ -76,6 +76,27 @@ app.post("/signup",(req,res)=>{
     users.push(userData);
     console.log(`User SignUp:`, userData)
     res.redirect("/login")
+})
+
+app.get("/voter-registration", (req, res) => {
+    res.render("voter-registration.ejs")
+})
+ 
+app.post("/voter-registration", (req, res) => {
+        const {first_name, middle_name, last_name, DOB, username, password} = req.body
+        db.serialize(() => {
+            db.run("INSERT INTO users VALUES (?,?,?,?,?)", [null,first_name, middle_name,last_name, DOB])
+            })
+            db.run("INSERT INTO auth VALUES(?,?,?,?)", [null,username,password, user_id = row.id])
+        db.close()
+})
+
+app.post("/party-registration", (req, res) => {
+        const {party, logo} = req.body
+        db.serialize(() => {
+            db.run("INSERT INTO party VALUES (?,?,?)", [null,party, logo])
+            })
+        db.close()
 })
  
 
