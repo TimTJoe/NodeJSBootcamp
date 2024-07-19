@@ -15,30 +15,14 @@ const db = new sqlite3.Database('./elections.db')
 
 db.serialize(() => {
 
-<<<<<<< HEAD
-    db.run('CREATE TABLE IF NOT EXISTS auth (id INT AUTO_INCREMENT PRIMARY KEY, username VARCHAR(50) NOT NUll UNIQUE, password VARCHAR(50) NOT NULL, user_id INT)')
-=======
-    db.run('CREATE TABLE IF NOT EXISTS auth (id INT AUTO_INCREMENT PRIMARY KEY, username VARCHAR(50) NOT NUll, password VARCHAR(50) NOT NULL, user_id INT)')
->>>>>>> 8586ce727030f75c79bc60cf40721bbbf9ebf73c
-    db.run('CREATE TABLE IF NOT EXISTS  roles (id INT AUTO_INCREMENT PRIMARY KEY, role VARCHAR(50) NOT NUll)')
-    db.run('CREATE TABLE IF NOT EXISTS users (id INT AUTO_INCREMENT PRIMARY KEY, first_name VARCHAR(50) NOT NUll, middle_name VARCHAR(50) NULL, last_name VARCHAR(50) NOT NULL, DOB DATE NOT NULL)')
-    db.run('CREATE TABLE IF NOT EXISTS parties (id INT AUTO_INCREMENT PRIMARY KEY, party VARCHAR(50) NOT NUll, logo BLOB NULL)')
-    db.run('CREATE TABLE IF NOT EXISTS positions (id INT AUTO_INCREMENT PRIMARY KEY, position VARCHAR(50) NOT NUll)')
-    db.run('CREATE TABLE IF NOT EXISTS candidates (id INT AUTO_INCREMENT PRIMARY KEY, first_name VARCHAR(50) NOT NUll, middle_name VARCHAR(50) NULL, last_name VARCHAR(50), position_id INT NOT NULL, party_id INT NOT NULL, photo BLOB NOT NULL)')
-    db.run('CREATE TABLE IF NOT EXISTS votes (id INT AUTO_INCREMENT PRIMARY KEY, candidate_id INT NOT NULL, vote INT NOT NULL)')
-
-//   const stmt = db.prepare('INSERT INTO auth VALUES ("", "joe", "12345678")')
-<<<<<<< HEAD
-=======
-
-//   stmt.finalize()
->>>>>>> 8586ce727030f75c79bc60cf40721bbbf9ebf73c
-
-//   stmt.finalize()
-
-//   db.each('SELECT * from auth', (err, row) => {
-//     console.log(row)
-//   })
+    db.run('CREATE TABLE IF NOT EXISTS auth (id INTEGER  PRIMARY KEY AUTOINCREMENT, username VARCHAR(50) NOT NUll UNIQUE, password VARCHAR(50) NOT NULL, user_id INTEGER)')
+    db.run('CREATE TABLE IF NOT EXISTS auth (id INTEGER  PRIMARY KEY AUTOINCREMENT, username VARCHAR(50) NOT NUll, password VARCHAR(50) NOT NULL, user_id INTEGER)')
+    db.run('CREATE TABLE IF NOT EXISTS  roles (id INTEGER  PRIMARY KEY AUTOINCREMENT, role VARCHAR(50) NOT NUll)')
+    db.run('CREATE TABLE IF NOT EXISTS users (id INTEGER  PRIMARY KEY AUTOINCREMENT, first_name VARCHAR(50) NOT NUll, middle_name VARCHAR(50) NULL, last_name VARCHAR(50) NOT NULL, DOB DATE NOT NULL)')
+    db.run('CREATE TABLE IF NOT EXISTS parties (id INTEGER  PRIMARY KEY AUTOINCREMENT, party VARCHAR(50) NOT NUll, logo BLOB NULL)')
+    db.run('CREATE TABLE IF NOT EXISTS positions (id INTEGER  PRIMARY KEY AUTOINCREMENT, position VARCHAR(50) NOT NUll)')
+    db.run('CREATE TABLE IF NOT EXISTS candidates (id INTEGER  PRIMARY KEY AUTOINCREMENT, first_name VARCHAR(50) NOT NUll, middle_name VARCHAR(50) NULL, last_name VARCHAR(50), position_id INTEGER NOT NULL, party_id INTEGER NOT NULL, photo BLOB NOT NULL)')
+    db.run('CREATE TABLE IF NOT EXISTS votes (id INTEGER  PRIMARY KEY AUTOINCREMENT, candidate_id INTEGER NOT NULL, vote INT NOT NULL)')
 
 })
 
@@ -60,7 +44,7 @@ app.get("/login", (req,res)=>{
 app.post("/login", (req,res)=>{   
 
     const {username, password} = req.body
-    db.each('SELECT * from auth', (err, row) => {
+    db.each('SELECT * from auth', function(err, row) {
         const user = row.username === username && row.password === password
             if(user) {
                res.redirect("/dashboard")
@@ -94,14 +78,19 @@ app.get("/voter-registration", (req, res) => {
  
 app.post("/voter-registration", (req, res) => {
     try {
-        const user_id = Date.now()
         const {first_name, middle_name, last_name, DOB, username, password} = req.body
-        db.serialize(() => {
-            db.run("INSERT INTO users VALUES (?,?,?,?,?)", [user_id,first_name, middle_name,last_name, DOB])
+
+        // db.serialize(() => {
+
+            db.run("INSERT INTO users VALUES (?,?,?,?)", [first_name, middle_name,last_name, DOB], function() {
+
+                db.run("INSERT INTO auth VALUES(?,?,?)", [username,password, this.lastID])
+                res.redirect("/login")
+
             })
-            const auth_id = Date.now()
-            db.run("INSERT INTO auth VALUES(?,?,?,?)", [auth_id,username,password, user_id])
-        res.send("Voter registration successful.")
+            // })
+
+        // res.send("Voter registration successful.")
     } catch (error) {
         res.send({message: "error occured", error})
     }
@@ -115,9 +104,9 @@ app.post("/party-registration", (req, res) => {
     try {
         const {party, logo} = req.body
         const id = Date.now()
-        db.serialize(() => {
+        // db.serialize(() => {
             db.run("INSERT INTO parties VALUES (?,?,?)", [id,party, logo])
-            })
+            // })
             res.send("Party registration successful")
     } catch (error) {
         res.send("An error occurred", error)
