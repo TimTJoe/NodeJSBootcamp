@@ -1,6 +1,7 @@
 <%- include("./partials/head") %>
 <%- include("./partials/nav") %>
     <main>
+     
         <form action="/voter-registration"  method="post" id="voterRegistration">
         <fieldset>
             <legend>Voter Registration</legend>
@@ -13,15 +14,25 @@
             <br/>
             <label for="last_name">Last Name:</label>
             <input type="text" id="last_name" name="last_name" required>
-            <br/>
+                <br/>
             <label for="DOB">Date of Birth:</label>
             <input type="date" id="DOB" name="DOB" required>
-            <br/>
+                <br/>
             <label for="username">Username:</label>
             <input type="text" id="username" name="username" required>
-            <br/>
+                <br/>
             <label for="password">Password:</label>
             <input type="password" id="password" name="password" required>
+                <br/>
+            <label for="profile_photo">Profile Photo: </label>
+            <input type="file" id="profile_photo" name="profile_photo" required>
+                <br/>
+            <label for="role">Role: </label>
+            <select name="role" id="role">
+                <% row.map((row, key) => { %>
+                    <option value="<%= row.id %>"><%= row.role %></option>
+                <%}) %>
+            </select>
             <br/>
             <br/>
             <button type="submit">Register</button>
