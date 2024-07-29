@@ -49,7 +49,7 @@ app.post("/login", (req, res) => {
     const { username, password } = req.body;
     
     // Query the database to find a matching username and password
-    db.get('SELECT * from auth WHERE username=? AND password=?', [username, password], function(err, row) {
+    db.all('SELECT * from auth WHERE username=? AND password=?', [username, password], function(err, row) {
         if (row) {
             // Redirect to the dashboard page upon successful login
             res.redirect("/dashboard"); 
@@ -79,7 +79,7 @@ app.post("/voter-registration", (req, res) => {
         // Destructure required fields from request body
         const {first_name, middle_name, last_name, DOB, username, password, photo, role} = req.body;
         // Insert user information into 'users' table in the database
-        db.run("INSERT INTO users VALUES(?,?,?,?,?,?,?)", [null, first_name, middle_name, last_name, DOB,photo, role], function(err) { 
+        db.run("INSERT INTO users VALUES(?,?,?,?,?,?,?)", [null, first_name, middle_name, last_name, DOB,photo,role], function(err) { 
             if(err) { 
                 // If there's an error, throw it
                 console.error(err)

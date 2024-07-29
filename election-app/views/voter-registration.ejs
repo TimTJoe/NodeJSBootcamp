@@ -24,12 +24,12 @@
             <label for="password">Password:</label>
             <input type="password" id="password" name="password" required>
                 <br/>
-            <label for="profile_photo">Profile Photo: </label>
-            <input type="file" id="profile_photo" name="profile_photo" required>
+            <label for="photo">Profile Photo: </label>
+            <input type="file" id="photo" name="photo" required>
                 <br/>
             <label for="role">Role: </label>
             <select name="role" id="role">
-                <% row.map((row, key) => { %>
+                <% row.map((row) => { %>
                     <option value="<%= row.id %>"><%= row.role %></option>
                 <%}) %>
             </select>
