@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function challenge1(){
+            console.log(1 == "1")
+            console.log(1 === "1")
+        }
+        // challenge1()
+        function challenge4() {
+            var data = 'age'
+            const person = {
+                name: 'John',
+                age: 30
+            }
+            console.log(person[data])
+            console.log(person.data)
+        }
+        // challenge4()
+        function challenge5() {
+            const numbers = [1,2,3,4,5]
+            for (let i = 0; i < numbers.length; i++) {
+                console.log(numbers[0]);
+            }
+        }
+        // challenge5()
+        function challenge6() {
+            let x = 10;
+            let y = 20
+            let z = x
+            x = y
+            y = z 
+            console.log("x is:", x);
+            console.log("y is:", y);
+            console.log("z is:", z);
+        }
+        challenge6()
+        function challenge7(a, b) {
+            console.log(a + b)
+        }
+        challenge7(8, '10')
+        challenge7(-6, 10)
+        function challenge9(params) {
+            var arr1 = [10,20]
+            var arr2 = [30,40]
+            var arr3 = arr1 + arr2
+            console.log(arr3)
+        }
+        challenge9()
+    </script>
+</body>
+</html>
